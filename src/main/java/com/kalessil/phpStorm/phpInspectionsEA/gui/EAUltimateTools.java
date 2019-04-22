@@ -1,6 +1,7 @@
 package com.kalessil.phpStorm.phpInspectionsEA.gui;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
 import org.jetbrains.annotations.NotNull;
@@ -18,7 +19,7 @@ import javax.swing.*;
  */
 
 public class EAUltimateTools extends AbstractProjectComponent {
-    final private String TOOL_WINDOW_ID = "Php Inspections (EA *)";
+    final private String TOOL_WINDOW_ID = "Inspections";
     final private ToolWindowManager windowManager;
 
     protected EAUltimateTools(@NotNull Project project) {
@@ -29,7 +30,9 @@ public class EAUltimateTools extends AbstractProjectComponent {
     @Override
     public void projectOpened() {
         if (!this.isInstantiated()) {
-            this.windowManager.registerToolWindow(TOOL_WINDOW_ID, new JPanel(), ToolWindowAnchor.RIGHT);
+            final ToolWindow window = this.windowManager.registerToolWindow(TOOL_WINDOW_ID, new JPanel(), ToolWindowAnchor.RIGHT);
+            window.setIcon(new ImageIcon(this.getClass().getResource("logo.png")));
+
         }
     }
 

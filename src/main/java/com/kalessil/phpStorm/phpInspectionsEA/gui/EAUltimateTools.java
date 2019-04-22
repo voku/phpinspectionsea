@@ -52,7 +52,7 @@ public class EAUltimateTools extends AbstractProjectComponent {
             component.addPanel("Distraction level settings",  panel ->
                     panel.addCheckbox("Analyze only modified files", settings.getCheckOnlyChangedFiles(), settings::setCheckOnlyChangedFiles)
             );
-            component.addPanel("Active inspections groups",   panel -> {
+            component.addPanel("Active code analysis groups",   panel -> {
                 panel.addCheckbox("Architecture",             true, (isSelected) -> {});
                 panel.addCheckbox("Control flow",             true, (isSelected) -> {});
                 panel.addCheckbox("Code style",               true, (isSelected) -> {});

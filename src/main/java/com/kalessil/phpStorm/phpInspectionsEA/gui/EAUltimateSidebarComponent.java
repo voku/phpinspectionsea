@@ -1,14 +1,18 @@
 package com.kalessil.phpStorm.phpInspectionsEA.gui;
 
+import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
+import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationConfiguration;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSettings;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.components.AbstractProjectComponent;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import java.util.function.Consumer;
 
 /*
  * This file is part of the Php Inspections (EA Extended) package.
@@ -39,14 +43,14 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
 
     @NotNull
     private JPanel buildPanel() {
-        final EAUltimateSettings settings = EAUltimateSettings.getInstance();
-
         return OptionsComponent.create(component -> {
             component.addPanel("License status",              panel -> {});
-            component.addPanel("Distraction level settings",  panel ->
-                    panel.addCheckbox("Analyze only modified files", settings.getCheckOnlyChangedFiles(), settings::setCheckOnlyChangedFiles)
+            component.addPanel("Settings management",         panel ->
+                    panel.addHyperlink("File / Settings / Php Inspections (EA Ultimate)", (event) -> {
+                            ShowSettingsUtil.getInstance().showSettingsDialog(null, EAUltimateApplicationConfiguration.class);
+                    })
             );
-            component.addPanel("Active code analysis groups",   panel -> {
+            component.addPanel("Active code analysis groups", panel -> {
                 panel.addCheckbox("Architecture",             true, (isSelected) -> {});
                 panel.addCheckbox("Control flow",             true, (isSelected) -> {});
                 panel.addCheckbox("Code style",               true, (isSelected) -> {});

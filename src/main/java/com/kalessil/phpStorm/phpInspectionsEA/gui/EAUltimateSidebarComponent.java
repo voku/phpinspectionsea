@@ -1,8 +1,5 @@
 package com.kalessil.phpStorm.phpInspectionsEA.gui;
 
-import com.intellij.ide.plugins.IdeaPluginDescriptor;
-import com.intellij.ide.plugins.PluginManager;
-import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
@@ -36,10 +33,7 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
         if (!this.isInstantiated()) {
             final ToolWindow window = this.windowManager.registerToolWindow(TOOL_WINDOW_ID, this.buildPanel(), ToolWindowAnchor.RIGHT);
             window.setIcon(new ImageIcon(this.getClass().getResource("/logo_15x15.png")));
-            final IdeaPluginDescriptor plugin = PluginManager.getPlugin(PluginId.getId("com.kalessil.phpStorm.phpInspectionsUltimate"));
-            if (plugin != null) {
-                window.setTitle(plugin.getName());
-            }
+            window.setTitle("project settings");
         }
     }
 

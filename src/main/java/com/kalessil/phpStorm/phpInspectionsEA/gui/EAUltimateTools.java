@@ -31,7 +31,7 @@ public class EAUltimateTools extends AbstractProjectComponent {
     public void projectOpened() {
         if (!this.isInstantiated()) {
             final ToolWindow window = this.windowManager.registerToolWindow(TOOL_WINDOW_ID, new JPanel(), ToolWindowAnchor.RIGHT);
-            window.setIcon(new ImageIcon(this.getClass().getResource("logo.png")));
+            window.setIcon(new ImageIcon(this.getClass().getResource("/logo_18x18.png")));
 
         }
     }

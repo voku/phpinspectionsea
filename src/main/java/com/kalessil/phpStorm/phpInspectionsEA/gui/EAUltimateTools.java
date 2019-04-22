@@ -26,13 +26,15 @@ public class EAUltimateTools extends AbstractProjectComponent {
         this.windowManager = ToolWindowManager.getInstance(project);
     }
 
-    @Override public void projectOpened() {
+    @Override
+    public void projectOpened() {
         if (!this.isInstantiated()) {
             this.windowManager.registerToolWindow(TOOL_WINDOW_ID, new JPanel(), ToolWindowAnchor.RIGHT);
         }
     }
 
-    @Override public void projectClosed() {
+    @Override
+    public void projectClosed() {
         if (this.isInstantiated()) {
             this.windowManager.unregisterToolWindow(TOOL_WINDOW_ID);
         }

@@ -45,7 +45,7 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
             component.addPanel("Settings management",         panel ->
                     panel.addHyperlink(
                             "File / Settings / Php Inspections (EA Ultimate)",
-                            (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(null, EAUltimateApplicationConfiguration.class)
+                            (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, EAUltimateApplicationConfiguration.class)
                     )
             );
             component.addPanel("Active code analysis groups", panel -> {

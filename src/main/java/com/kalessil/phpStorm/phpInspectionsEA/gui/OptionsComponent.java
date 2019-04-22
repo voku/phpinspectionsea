@@ -106,7 +106,7 @@ public final class OptionsComponent {
     }
 
     public void addHyperlink(@NotNull String label, @NotNull Class component) {
-        addHyperlink(label, event -> ShowSettingsUtil.getInstance().showSettingsDialog(null, EAUltimateApplicationConfiguration.class));
+        addHyperlink(label, event -> ShowSettingsUtil.getInstance().showSettingsDialog(null, component));
     }
 
     public void addPanel(

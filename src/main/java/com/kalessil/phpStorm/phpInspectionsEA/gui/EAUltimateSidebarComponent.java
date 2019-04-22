@@ -48,12 +48,12 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                             (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, EAUltimateApplicationConfiguration.class)
                     )
             );
-            component.addPanel("Active code analysis groups", panel -> {
-                panel.addCheckbox("Probable bugs (level 0)",            true, (isSelected) -> {});
-                panel.addCheckbox("Security (level 1)",                 true, (isSelected) -> {});
+            component.addPanel("Strictness level", panel -> {
+                panel.addCheckbox("Security (level 0)",                 true, (isSelected) -> {});
+                panel.addCheckbox("Probable bugs (level 1)",            true, (isSelected) -> {});
                 panel.addCheckbox("Performance (level 2)",              true, (isSelected) -> {});
-                panel.addCheckbox("Control flow (level 3)",             true, (isSelected) -> {});
-                panel.addCheckbox("Architecture (level 4)",             true, (isSelected) -> {});
+                panel.addCheckbox("Architecture (level 3)",             true, (isSelected) -> {});
+                panel.addCheckbox("Control flow (level 4)",             true, (isSelected) -> {});
                 panel.addCheckbox("Language level migration (level 5)", true, (isSelected) -> {});
                 panel.addCheckbox("Code style (level 6)",               true, (isSelected) -> {});
                 panel.addCheckbox("Unused (level 7)",                   true, (isSelected) -> {});

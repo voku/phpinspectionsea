@@ -2,11 +2,10 @@ package com.kalessil.phpStorm.phpInspectionsEA.gui;
 
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.options.ShowSettingsUtil;
+import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ex.Settings;
 import com.intellij.ui.HyperlinkLabel;
 import com.intellij.ui.SeparatorFactory;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationConfiguration;
 import net.miginfocom.swing.MigLayout;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -105,8 +104,17 @@ public final class OptionsComponent {
         optionsPanel.add(createdHyperlink);
     }
 
-    public void addHyperlink(@NotNull String label, @NotNull Class component) {
-        addHyperlink(label, event -> ShowSettingsUtil.getInstance().showSettingsDialog(null, component));
+    public void addHyperlink(@NotNull String label, @NotNull Class<?extends Configurable> component) {
+        addHyperlink(label, event ->
+                DataManager.getInstance().getDataContextFromFocus().doWhenDone((com.intellij.util.Consumer<DataContext>) context -> {
+                    if (context != null) {
+                        final Settings settings = Settings.KEY.getData(context);
+                        if (settings != null) {
+                            settings.select(settings.find(component));
+                        }
+                    }
+                })
+        );
     }
 
     public void addPanel(

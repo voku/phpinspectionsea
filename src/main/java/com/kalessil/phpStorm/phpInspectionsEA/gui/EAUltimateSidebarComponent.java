@@ -49,14 +49,14 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                     )
             );
             component.addPanel("Active code analysis groups", panel -> {
-                panel.addCheckbox("Architecture",             true, (isSelected) -> {});
-                panel.addCheckbox("Control flow",             true, (isSelected) -> {});
-                panel.addCheckbox("Code style",               true, (isSelected) -> {});
-                panel.addCheckbox("Language level migration", true, (isSelected) -> {});
-                panel.addCheckbox("Performance",              true, (isSelected) -> {});
-                panel.addCheckbox("Probable bugs",            true, (isSelected) -> {});
-                panel.addCheckbox("Security",                 true, (isSelected) -> {});
-                panel.addCheckbox("Unused",                   true, (isSelected) -> {});
+                panel.addCheckbox("Probable bugs (level 0)",            true, (isSelected) -> {});
+                panel.addCheckbox("Security (level 1)",                 true, (isSelected) -> {});
+                panel.addCheckbox("Performance (level 2)",              true, (isSelected) -> {});
+                panel.addCheckbox("Control flow (level 3)",             true, (isSelected) -> {});
+                panel.addCheckbox("Architecture (level 4)",             true, (isSelected) -> {});
+                panel.addCheckbox("Language level migration (level 5)", true, (isSelected) -> {});
+                panel.addCheckbox("Code style (level 6)",               true, (isSelected) -> {});
+                panel.addCheckbox("Unused (level 7)",                   true, (isSelected) -> {});
             });
         });
     }

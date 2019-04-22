@@ -4,9 +4,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationConfiguration;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSettings;
-import com.kalessil.phpStorm.phpInspectionsEA.options.OptionsComponent;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.components.AbstractProjectComponent;
 
@@ -35,7 +33,6 @@ public class EAUltimateTools extends AbstractProjectComponent {
         if (!this.isInstantiated()) {
             final ToolWindow window = this.windowManager.registerToolWindow(TOOL_WINDOW_ID, this.buildPanel(), ToolWindowAnchor.RIGHT);
             window.setIcon(new ImageIcon(this.getClass().getResource("/logo_18x18.png")));
-
         }
     }
 
@@ -44,9 +41,19 @@ public class EAUltimateTools extends AbstractProjectComponent {
         final EAUltimateSettings settings = EAUltimateSettings.getInstance();
 
         return OptionsComponent.create(component -> {
-            component.addPanel("Distraction level", panel ->
+            component.addPanel("Distraction level (global)", panel ->
                     panel.addCheckbox("Analyze only modified files", settings.getCheckOnlyChangedFiles(), settings::setCheckOnlyChangedFiles)
             );
+            component.addPanel("Active inspections groups (project)", panel -> {
+                panel.addCheckbox("Architecture",             true, (isSelected) -> {});
+                panel.addCheckbox("Control Flow",             true, (isSelected) -> {});
+                panel.addCheckbox("Code Style",               true, (isSelected) -> {});
+                panel.addCheckbox("Language level migration", true, (isSelected) -> {});
+                panel.addCheckbox("Performance",              true, (isSelected) -> {});
+                panel.addCheckbox("Probable bugs",            true, (isSelected) -> {});
+                panel.addCheckbox("Security",                 true, (isSelected) -> {});
+                panel.addCheckbox("Unused",                   true, (isSelected) -> {});
+            });
         });
     }
 

@@ -1,11 +1,10 @@
-package com.kalessil.phpStorm.phpInspectionsEA.options;
+package com.kalessil.phpStorm.phpInspectionsEA.gui;
 
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.options.ex.Settings;
 import com.intellij.ui.HyperlinkLabel;
 import com.intellij.ui.SeparatorFactory;
-import com.kalessil.phpStorm.phpInspectionsEA.gui.PrettyListControl;
 import net.miginfocom.swing.MigLayout;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

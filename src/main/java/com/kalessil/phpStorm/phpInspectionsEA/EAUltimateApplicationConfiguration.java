@@ -1,7 +1,7 @@
 package com.kalessil.phpStorm.phpInspectionsEA;
 
 import com.intellij.openapi.options.Configurable;
-import com.kalessil.phpStorm.phpInspectionsEA.options.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.ComparisonStyle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;

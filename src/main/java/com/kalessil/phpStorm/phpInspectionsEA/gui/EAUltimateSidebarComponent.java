@@ -49,14 +49,14 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                     )
             );
             component.addPanel("Strictness categories (loosest to strictest)", panel -> {
-                panel.addCheckbox("Security",                 true, (isSelected) -> {});
-                panel.addCheckbox("Probable bugs",            true, (isSelected) -> {});
-                panel.addCheckbox("Performance",              true, (isSelected) -> {});
-                panel.addCheckbox("Architecture",             true, (isSelected) -> {});
-                panel.addCheckbox("Control flow",             true, (isSelected) -> {});
-                panel.addCheckbox("Language level migration", true, (isSelected) -> {});
-                panel.addCheckbox("Code style",               true, (isSelected) -> {});
-                panel.addCheckbox("Unused",                   true, (isSelected) -> {});
+                panel.addCheckbox("Prio 1: Security",                 true, (isSelected) -> {});
+                panel.addCheckbox("Prio 2: Probable bugs",            true, (isSelected) -> {});
+                panel.addCheckbox("Prio 3: Performance",              true, (isSelected) -> {});
+                panel.addCheckbox("Prio 4: Architecture",             true, (isSelected) -> {});
+                panel.addCheckbox("Prio 5: Control flow",             true, (isSelected) -> {});
+                panel.addCheckbox("Prio 6: Language level migration", true, (isSelected) -> {});
+                panel.addCheckbox("Prio 7: Code style",               true, (isSelected) -> {});
+                panel.addCheckbox("Prio 8: Unused",                   true, (isSelected) -> {});
             });
         });
     }

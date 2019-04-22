@@ -22,11 +22,11 @@ import javax.swing.*;
  * file that was distributed with this source code.
  */
 
-public class EAUltimateTools extends AbstractProjectComponent {
+public class EAUltimateSidebarComponent extends AbstractProjectComponent {
     final private String TOOL_WINDOW_ID = "PHP Inspections";
     final private ToolWindowManager windowManager;
 
-    protected EAUltimateTools(@NotNull Project project) {
+    protected EAUltimateSidebarComponent(@NotNull Project project) {
         super(project);
         this.windowManager = ToolWindowManager.getInstance(project);
     }
@@ -35,7 +35,7 @@ public class EAUltimateTools extends AbstractProjectComponent {
     public void projectOpened() {
         if (!this.isInstantiated()) {
             final ToolWindow window = this.windowManager.registerToolWindow(TOOL_WINDOW_ID, this.buildPanel(), ToolWindowAnchor.RIGHT);
-            window.setIcon(new ImageIcon(this.getClass().getResource("/logo_18x18.png")));
+            window.setIcon(new ImageIcon(this.getClass().getResource("/logo_15x15.png")));
             final IdeaPluginDescriptor plugin = PluginManager.getPlugin(PluginId.getId("com.kalessil.phpStorm.phpInspectionsUltimate"));
             if (plugin != null) {
                 window.setTitle(plugin.getName());

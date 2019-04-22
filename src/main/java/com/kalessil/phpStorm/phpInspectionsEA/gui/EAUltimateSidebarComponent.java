@@ -48,15 +48,15 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                             (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, EAUltimateApplicationConfiguration.class)
                     )
             );
-            component.addPanel("Strictness level (loosest to the strictest)", panel -> {
-                panel.addCheckbox("Level 0: Security",                 true, (isSelected) -> {});
-                panel.addCheckbox("Level 1: Probable bugs",            true, (isSelected) -> {});
-                panel.addCheckbox("Level 2: Performance",              true, (isSelected) -> {});
-                panel.addCheckbox("Level 3: Architecture",             true, (isSelected) -> {});
-                panel.addCheckbox("Level 4: Control flow",             true, (isSelected) -> {});
-                panel.addCheckbox("Level 5: Language level migration", true, (isSelected) -> {});
-                panel.addCheckbox("Level 6: Code style",               true, (isSelected) -> {});
-                panel.addCheckbox("Level 7: Unused",                   true, (isSelected) -> {});
+            component.addPanel("Strictness categories (loosest to strictest)", panel -> {
+                panel.addCheckbox("Security",                 true, (isSelected) -> {});
+                panel.addCheckbox("Probable bugs",            true, (isSelected) -> {});
+                panel.addCheckbox("Performance",              true, (isSelected) -> {});
+                panel.addCheckbox("Architecture",             true, (isSelected) -> {});
+                panel.addCheckbox("Control flow",             true, (isSelected) -> {});
+                panel.addCheckbox("Language level migration", true, (isSelected) -> {});
+                panel.addCheckbox("Code style",               true, (isSelected) -> {});
+                panel.addCheckbox("Unused",                   true, (isSelected) -> {});
             });
         });
     }

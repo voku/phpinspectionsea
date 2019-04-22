@@ -42,12 +42,16 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
     private JPanel buildPanel() {
         return OptionsComponent.create(component -> {
             component.addPanel("License status",              panel -> {});
-            component.addPanel("Settings management",         panel ->
-                    panel.addHyperlink(
-                            "File / Settings / Php Inspections (EA Ultimate)",
-                            (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, EAUltimateApplicationConfiguration.class)
-                    )
-            );
+            component.addPanel("Settings management",         panel -> {
+                panel.addHyperlink(
+                        "File / Settings / Php Inspections (EA Ultimate)",
+                        (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, EAUltimateApplicationConfiguration.class)
+                );
+                panel.addHyperlink(
+                        "File / Settings / Editor / Inspections",
+                        (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, "Inspections")
+                );
+            });
             component.addPanel("Strictness categories (loosest to strictest)", panel -> {
                 panel.addCheckbox("Prio 1: Security",                 true, (isSelected) -> {});
                 panel.addCheckbox("Prio 2: Probable bugs",            true, (isSelected) -> {});

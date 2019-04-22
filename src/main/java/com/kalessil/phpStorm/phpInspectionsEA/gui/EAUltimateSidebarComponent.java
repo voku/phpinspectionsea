@@ -48,15 +48,15 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                             (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, EAUltimateApplicationConfiguration.class)
                     )
             );
-            component.addPanel("Strictness level", panel -> {
-                panel.addCheckbox("Security (level 0)",                 true, (isSelected) -> {});
-                panel.addCheckbox("Probable bugs (level 1)",            true, (isSelected) -> {});
-                panel.addCheckbox("Performance (level 2)",              true, (isSelected) -> {});
-                panel.addCheckbox("Architecture (level 3)",             true, (isSelected) -> {});
-                panel.addCheckbox("Control flow (level 4)",             true, (isSelected) -> {});
-                panel.addCheckbox("Language level migration (level 5)", true, (isSelected) -> {});
-                panel.addCheckbox("Code style (level 6)",               true, (isSelected) -> {});
-                panel.addCheckbox("Unused (level 7)",                   true, (isSelected) -> {});
+            component.addPanel("Strictness level (loosest to the strictest)", panel -> {
+                panel.addCheckbox("Level 0: Security",                 true, (isSelected) -> {});
+                panel.addCheckbox("Level 1: Probable bugs",            true, (isSelected) -> {});
+                panel.addCheckbox("Level 2: Performance",              true, (isSelected) -> {});
+                panel.addCheckbox("Level 3: Architecture",             true, (isSelected) -> {});
+                panel.addCheckbox("Level 4: Control flow",             true, (isSelected) -> {});
+                panel.addCheckbox("Level 5: Language level migration", true, (isSelected) -> {});
+                panel.addCheckbox("Level 6: Code style",               true, (isSelected) -> {});
+                panel.addCheckbox("Level 7: Unused",                   true, (isSelected) -> {});
             });
         });
     }

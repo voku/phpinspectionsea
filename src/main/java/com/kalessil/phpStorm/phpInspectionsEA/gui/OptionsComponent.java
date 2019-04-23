@@ -101,7 +101,7 @@ public final class OptionsComponent {
     void addHyperlink(@NotNull String label, @NotNull Consumer<HyperlinkEvent> consumer) {
         final HyperlinkLabel createdHyperlink = new HyperlinkLabel(label);
         createdHyperlink.addHyperlinkListener(consumer::accept);
-        optionsPanel.add(createdHyperlink);
+        optionsPanel.add(createdHyperlink, "wrap");
     }
 
     public void addHyperlink(@NotNull String label, @NotNull Class<?extends Configurable> component) {

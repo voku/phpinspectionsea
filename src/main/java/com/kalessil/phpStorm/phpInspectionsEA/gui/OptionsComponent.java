@@ -98,6 +98,10 @@ public final class OptionsComponent {
         }).getComponent(), "pushx, growx");
     }
 
+    void addText(@NotNull final String label) {
+        optionsPanel.add(new JLabel(label), "wrap, growx");
+    }
+
     void addHyperlink(@NotNull String label, @NotNull Consumer<HyperlinkEvent> consumer) {
         final HyperlinkLabel createdHyperlink = new HyperlinkLabel(label);
         createdHyperlink.addHyperlinkListener(consumer::accept);

@@ -5,7 +5,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
+import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationConfiguration;
+import com.kalessil.phpStorm.phpInspectionsEA.license.LicenseService;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.components.AbstractProjectComponent;
 
@@ -41,7 +43,24 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
     @NotNull
     private JPanel buildPanel() {
         return OptionsComponent.create(component -> {
-            component.addPanel("License status",              panel -> {});
+            component.addPanel("License information",         panel -> {
+                String message               = "Licensing information is not available";
+                final LicenseService service = EAUltimateApplicationComponent.getLicenseService();
+                if (service != null && service.shouldCheckPluginLicense()) {
+                    try {
+                        if (service.isActivatedLicense()) {
+                            message = "Activated (running all features)";
+                        } else if (service.isTrialLicense()) {
+                            message = service.isActiveTrialLicense()
+                                    ? "Active trial (running all features)."
+                                    : "Expired trial (partially suspended features)";
+                        } else {
+                            message = "Not activated (partially suspended features)";
+                        }
+                    } catch (final Exception failure) { /* do nothing */ }
+                }
+                panel.addText(message + ", as of IDE start.");
+            });
             component.addPanel("Settings management",         panel -> {
                 panel.addHyperlink(
                         "File / Settings / Php Inspections (EA Ultimate)",

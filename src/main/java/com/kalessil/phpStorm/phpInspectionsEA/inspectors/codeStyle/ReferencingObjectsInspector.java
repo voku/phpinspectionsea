@@ -12,6 +12,7 @@ import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.NamedElementUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiPsiSearchUtil;
@@ -56,14 +57,14 @@ public class ReferencingObjectsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method)) { return; }
+                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_CONFUSING_CONSTRUCTS)) { return; }
 
                 this.inspectCallable(method);
             }
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (this.isContainingFileSkipped(function)) { return; }
+                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_CONFUSING_CONSTRUCTS)) { return; }
 
                 this.inspectCallable(function);
             }
@@ -108,7 +109,7 @@ public class ReferencingObjectsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpNewExpression(@NotNull NewExpression expression) {
-                if (this.isContainingFileSkipped(expression)) { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONFUSING_CONSTRUCTS)) { return; }
 
                 final PsiElement parent = expression.getParent();
                 if (parent instanceof AssignmentExpression) {

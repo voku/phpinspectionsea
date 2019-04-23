@@ -9,6 +9,7 @@ import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.visitors.PhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateChangesTrackerComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSettings;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -121,6 +122,10 @@ public abstract class BasePhpElementVisitor extends PhpElementVisitor {
             result = function.getFQN().equals('\\' + function.getName());
         }
         return result && !(reference.getParent() instanceof PhpUse);
+    }
+
+    protected boolean isContainingFileSkipped(@NotNull PsiElement target, @NotNull StrictnessCategory category) {
+        return this.isContainingFileSkipped(target);
     }
 
     protected boolean isContainingFileSkipped(@NotNull PsiElement target) {

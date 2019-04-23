@@ -14,6 +14,7 @@ import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +46,7 @@ public class UselessReturnInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpReturn(@NotNull PhpReturn expression) {
-                if (this.isContainingFileSkipped(expression)) { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONFUSING_CONSTRUCTS)) { return; }
 
                 final PhpExpression returnValue = ExpressionSemanticUtil.getReturnValue(expression);
                 if (returnValue instanceof AssignmentExpression) {
@@ -73,7 +74,7 @@ public class UselessReturnInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method)) { return; }
+                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_CONFUSING_CONSTRUCTS)) { return; }
 
                 if (!method.isAbstract()) {
                     this.inspectForSenselessReturn(method);
@@ -82,7 +83,7 @@ public class UselessReturnInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (this.isContainingFileSkipped(function)) { return; }
+                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_CONFUSING_CONSTRUCTS)) { return; }
 
                 this.inspectForSenselessReturn(function);
             }

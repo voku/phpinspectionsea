@@ -143,27 +143,6 @@
 
 
     <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="IsEmptyFunctionUsageInspection"                displayName="'empty(...)' usage"
-        groupName="Type compatibility"                            enabledByDefault="true" level="WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.IsEmptyFunctionUsageInspector"/>
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="TypeUnsafeComparisonInspection"                displayName="Type unsafe comparison"
-        groupName="Type compatibility"                            enabledByDefault="true" level="WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.languageConstructions.TypeUnsafeComparisonInspector"/>
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="TypeUnsafeArraySearchInspection"               displayName="'in_array(...)', 'array_search(...)' type unsafe usage"
-        groupName="Type compatibility"                            enabledByDefault="true" level="WEAK WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.arrays.TypeUnsafeArraySearchInspector"/>
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="ForeachSourceInspection"                       displayName="Foreach source to iterate over"
-        groupName="Type compatibility"                            enabledByDefault="false" level="WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.forEach.ForeachSourceInspector"/>
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="JsonDecodeUsageInspection"                     displayName="'json_decode(...)' result type"
-        groupName="Type compatibility"                            enabledByDefault="true" level="WEAK WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.JsonDecodeUsageInspector"/>
-
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
         shortName="UnSafeIsSetOverArrayInspection"                displayName="'isset(...)' usage"
         groupName="Control Flow"                                  enabledByDefault="true" level="WARNING"
         implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.UnSafeIsSetOverArrayInspector"/>
@@ -533,6 +512,14 @@
         shortName="StaticLambdaBindingInspection"                 displayName="Static lambdas binding"
         groupName="Probable bugs"                                 enabledByDefault="true" level="ERROR"
         implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.languageConstructions.StaticLambdaBindingInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="ForeachSourceInspection"                       displayName="Foreach source to iterate over"
+        groupName="Probable bugs"                                 enabledByDefault="false" level="WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.forEach.ForeachSourceInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="JsonDecodeUsageInspection"                     displayName="'json_decode(...)' result type"
+        groupName="Probable bugs"                                 enabledByDefault="true" level="WEAK WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.JsonDecodeUsageInspector"/>
 
 
     <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
@@ -841,6 +828,18 @@
         shortName="FopenBinaryUnsafeUsageInspection"              displayName="Binary-unsafe 'fopen(...)' usage"
         groupName="Code Style"                                    enabledByDefault="true" level="WARNING"
         implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.fileSystem.FopenBinaryUnsafeUsageInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="IsEmptyFunctionUsageInspection"                displayName="'empty(...)' usage"
+        groupName="Code Style"                                    enabledByDefault="true" level="WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.IsEmptyFunctionUsageInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="TypeUnsafeComparisonInspection"                displayName="Type unsafe comparison"
+        groupName="Code Style"                                    enabledByDefault="true" level="WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.languageConstructions.TypeUnsafeComparisonInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="TypeUnsafeArraySearchInspection"               displayName="'in_array(...)', 'array_search(...)' type unsafe usage"
+        groupName="Code Style"                                    enabledByDefault="true" level="WEAK WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.arrays.TypeUnsafeArraySearchInspector"/>
 
 
     <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"

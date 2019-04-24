@@ -7,16 +7,6 @@ Abbreviations meaning:
 - QFTs - Inspection has QF tests;
 - Doc  - documentation at GitHub (IDE also has shorter version of inspections descriptions, not reflected in the list);
 
-Inspections Lists (Type compatibility)
----
-| Group                | Short Name                                      | Full Name                                              | QF  | UTs | QFTs | Doc |
-| :------------------- | :-------------------------------------------    | :----------------------------------------------------- | --: | --: | ---: | --: |
-| Type compatibility   | IsEmptyFunctionUsageInspection                  | 'empty(...)' usage                                     | yes | yes | yes  | yes |
-| Type compatibility   | TypeUnsafeComparisonInspection                  | Type unsafe comparison                                 | yes | yes | yes  | yes |
-| Type compatibility   | TypeUnsafeArraySearchInspection                 | 'in_array(...)', 'array_search(...)' type unsafe usage | yes | yes | yes  | yes |
-| Type compatibility   | ForeachSourceInspection                         | Foreach source to iterate over                         | n/a | yes | n/a  | yes |
-| Type compatibility   | JsonDecodeUsageInspection                       | 'json_decode(...)' result type                         | yes | yes | yes  | no  |
-
 Inspections Lists (Control flow)
 ---
 | Group                | Short Name                                      | Full Name                                                                         | QF  | UTs | QFTs | Doc |
@@ -82,43 +72,46 @@ Inspections Lists (Unused)
 
 Inspections Lists (Code style)
 ---
-| Group                | Short Name                                      | Full Name                                           | QF  | UTs | QFTs | Doc |
-| :------------------- | :-------------------------------------------    | :-------------------------------------------------- | --: | --: | ---: | --: |
-| Code Style           | UnNecessaryDoubleQuotesInspection               | Unnecessary double quotes                           | yes | yes | yes  | no  |
-| Code Style           | MissingOrEmptyGroupStatementInspection          | Missing or empty conditionals group statement       | yes | yes | yes  | no  |
-| Code Style           | SenselessCommaInArrayDefinitionInspection       | Unnecessary last comma in array definition          | yes | yes | yes  | no  |
-| Code Style           | AccessModifierPresentedInspection               | Access modifiers shall be defined                   | yes | yes | yes  | yes |
-| Code Style           | NestedPositiveIfStatementsInspection            | Nested positive ifs                                 | yes | yes | yes  | no  |
-| Code Style           | StaticInvocationViaThisInspection               | Static methods invocation via '->'                  | yes | yes | yes  | no  |
-| Code Style           | UnnecessaryParenthesesInspection                | Unnecessary parentheses                             | yes | yes | yes  | no  |
-| Code Style           | DynamicInvocationViaScopeResolutionInspection   | Dynamic methods invocation via '::'                 | yes | yes | yes  | no  |
-| Code Style           | UnnecessarySemicolonInspection                  | Unnecessary semicolon                               | yes | yes | yes  | no  |
-| Code Style           | UnnecessaryUseAliasInspection                   | Unnecessary use aliases                             | yes | yes | yes  | no  |
-| Code Style           | NestedNotOperatorsInspection                    | Nested not operators usage                          | yes | yes | yes  | no  |
-| Code Style           | IncrementDecrementOperationEquivalentInspection | Increment/decrement operation equivalent            | yes | yes | yes  | no  |
-| Code Style           | OpAssignShortSyntaxInspection                   | Short syntax for applied operation                  | yes | yes | yes  | no  |
-| Code Style           | UnnecessaryFinalModifierInspection              | Unnecessary final modifiers                         | yes | yes | yes  | no  |
-| Code Style           | UsingInclusionReturnValueInspection             | Usage of inclusion return value                     | n/a | yes | n/a  | no  |
-| Code Style           | ShortOpenTagUsageInspection                     | PHP short open tag usage                            | yes | yes | yes  | no  |
-| Code Style           | ComparisonOperandsOrderInspection               | Yoda/regular conditions style usage                 | yes | yes | yes  | no  |
-| Code Style           | UnknownInspectionInspection                     | Unknown inspection suppression                      | n/a | yes | n/a  | no  |
-| Code Style           | ParameterDefaultValueIsNotNullInspection        | Non-null parameters default value                   | n/a | yes | n/a  | yes |
-| Code Style           | MisorderedModifiersInspection                   | PSR-compliant modifiers order                       | yes | yes | yes  | no  |
-| Code Style           | DisallowWritingIntoStaticPropertiesInspection   | Disallow writing into static properties             | n/a | yes | n/a  | no  |
-| Code Style           | UnnecessaryCastingInspection                    | Unnecessary type casting                            | yes | yes | yes  | no  |
-| Code Style           | SelfClassReferencingInspection                  | Self class referencing                              | yes | yes | yes  | no  |
-| Code Style           | UnnecessaryClosureInspection                    | Unnecessary closures                                | yes | yes | yes  | no  |
-| Code Style           | MissUsingParentKeywordInspection                | 'parent' keyword misused                            | yes | yes | yes  | no  |
-| Code Style           | NestedAssignmentsUsageInspection                | Nested assignments usage                            | yes | yes | yes  | no  |
-| Code Style           | ProperNullCoalescingOperatorUsageInspection     | Proper null-coalescing operator usage               | yes | yes | yes  | no  |
-| Code Style           | StaticClosureCanBeUsedInspection                | Static closure can be used                          | yes | yes | yes  | no  |
-| Code Style           | ImplodeArgumentsOrderInspection                 | 'implode(...)' arguments order                      | yes | yes | yes  | no  |
-| Code Style           | ShortEchoTagCanBeUsedInspection                 | Short echo tag can be used                          | yes | yes | yes  | no  |
-| Code Style           | ClassMethodNameMatchesFieldNameInspection       | Method name matches existing field name             | n/a | yes | n/a  | no  |
-| Code Style           | NestedTernaryOperatorInspection                 | Nested ternary operator                             | n/a | yes | n/a  | no  |
-| Code Style           | UselessReturnInspection                         | Useless return                                      | yes | yes | yes  | no  |
-| Code Style           | ReferencingObjectsInspection                    | Referencing objects                                 | yes | yes | yes  | no  |
-| Code Style           | FopenBinaryUnsafeUsageInspection                | Binary-unsafe 'fopen(...)' usage                    | yes | yes | yes  | no  |
+| Group                | Short Name                                      | Full Name                                              | QF  | UTs | QFTs | Doc |
+| :------------------- | :-------------------------------------------    | :----------------------------------------------------- | --: | --: | ---: | --: |
+| Code Style           | UnNecessaryDoubleQuotesInspection               | Unnecessary double quotes                              | yes | yes | yes  | no  |
+| Code Style           | MissingOrEmptyGroupStatementInspection          | Missing or empty conditionals group statement          | yes | yes | yes  | no  |
+| Code Style           | SenselessCommaInArrayDefinitionInspection       | Unnecessary last comma in array definition             | yes | yes | yes  | no  |
+| Code Style           | AccessModifierPresentedInspection               | Access modifiers shall be defined                      | yes | yes | yes  | yes |
+| Code Style           | NestedPositiveIfStatementsInspection            | Nested positive ifs                                    | yes | yes | yes  | no  |
+| Code Style           | StaticInvocationViaThisInspection               | Static methods invocation via '->'                     | yes | yes | yes  | no  |
+| Code Style           | UnnecessaryParenthesesInspection                | Unnecessary parentheses                                | yes | yes | yes  | no  |
+| Code Style           | DynamicInvocationViaScopeResolutionInspection   | Dynamic methods invocation via '::'                    | yes | yes | yes  | no  |
+| Code Style           | UnnecessarySemicolonInspection                  | Unnecessary semicolon                                  | yes | yes | yes  | no  |
+| Code Style           | UnnecessaryUseAliasInspection                   | Unnecessary use aliases                                | yes | yes | yes  | no  |
+| Code Style           | NestedNotOperatorsInspection                    | Nested not operators usage                             | yes | yes | yes  | no  |
+| Code Style           | IncrementDecrementOperationEquivalentInspection | Increment/decrement operation equivalent               | yes | yes | yes  | no  |
+| Code Style           | OpAssignShortSyntaxInspection                   | Short syntax for applied operation                     | yes | yes | yes  | no  |
+| Code Style           | UnnecessaryFinalModifierInspection              | Unnecessary final modifiers                            | yes | yes | yes  | no  |
+| Code Style           | UsingInclusionReturnValueInspection             | Usage of inclusion return value                        | n/a | yes | n/a  | no  |
+| Code Style           | ShortOpenTagUsageInspection                     | PHP short open tag usage                               | yes | yes | yes  | no  |
+| Code Style           | ComparisonOperandsOrderInspection               | Yoda/regular conditions style usage                    | yes | yes | yes  | no  |
+| Code Style           | UnknownInspectionInspection                     | Unknown inspection suppression                         | n/a | yes | n/a  | no  |
+| Code Style           | ParameterDefaultValueIsNotNullInspection        | Non-null parameters default value                      | n/a | yes | n/a  | yes |
+| Code Style           | MisorderedModifiersInspection                   | PSR-compliant modifiers order                          | yes | yes | yes  | no  |
+| Code Style           | DisallowWritingIntoStaticPropertiesInspection   | Disallow writing into static properties                | n/a | yes | n/a  | no  |
+| Code Style           | UnnecessaryCastingInspection                    | Unnecessary type casting                               | yes | yes | yes  | no  |
+| Code Style           | SelfClassReferencingInspection                  | Self class referencing                                 | yes | yes | yes  | no  |
+| Code Style           | UnnecessaryClosureInspection                    | Unnecessary closures                                   | yes | yes | yes  | no  |
+| Code Style           | MissUsingParentKeywordInspection                | 'parent' keyword misused                               | yes | yes | yes  | no  |
+| Code Style           | NestedAssignmentsUsageInspection                | Nested assignments usage                               | yes | yes | yes  | no  |
+| Code Style           | ProperNullCoalescingOperatorUsageInspection     | Proper null-coalescing operator usage                  | yes | yes | yes  | no  |
+| Code Style           | StaticClosureCanBeUsedInspection                | Static closure can be used                             | yes | yes | yes  | no  |
+| Code Style           | ImplodeArgumentsOrderInspection                 | 'implode(...)' arguments order                         | yes | yes | yes  | no  |
+| Code Style           | ShortEchoTagCanBeUsedInspection                 | Short echo tag can be used                             | yes | yes | yes  | no  |
+| Code Style           | ClassMethodNameMatchesFieldNameInspection       | Method name matches existing field name                | n/a | yes | n/a  | no  |
+| Code Style           | NestedTernaryOperatorInspection                 | Nested ternary operator                                | n/a | yes | n/a  | no  |
+| Code Style           | UselessReturnInspection                         | Useless return                                         | yes | yes | yes  | no  |
+| Code Style           | ReferencingObjectsInspection                    | Referencing objects                                    | yes | yes | yes  | no  |
+| Code Style           | FopenBinaryUnsafeUsageInspection                | Binary-unsafe 'fopen(...)' usage                       | yes | yes | yes  | no  |
+| Code Style           | IsEmptyFunctionUsageInspection                  | 'empty(...)' usage                                     | yes | yes | yes  | yes |
+| Code Style           | TypeUnsafeComparisonInspection                  | Type unsafe comparison                                 | yes | yes | yes  | yes |
+| Code Style           | TypeUnsafeArraySearchInspection                 | 'in_array(...)', 'array_search(...)' type unsafe usage | yes | yes | yes  | yes |
 
 Inspections Lists (Language level migration)
 ---
@@ -234,6 +227,8 @@ Inspections Lists (Probable bugs)
 | Probable bugs        | GetSetMethodCorrectnessInspection               | get/set methods correctness                               | n/a | yes | n/a  | no  |
 | Probable bugs        | SuspiciousVariableDeclarationInspection         | Suspicious variable declaration                           | n/a | yes | n/a  | no  |
 | Probable bugs        | StaticLambdaBindingInspection                   | Static lambdas binding                                    | yes | yes | yes  | no  |
+| Probable bugs        | ForeachSourceInspection                         | Foreach source to iterate over                            | n/a | yes | n/a  | yes |
+| Probable bugs        | JsonDecodeUsageInspection                       | 'json_decode(...)' result type                            | yes | yes | yes  | no  |
 
 Inspections Lists (Security)
 ---

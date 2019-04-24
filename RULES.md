@@ -89,15 +89,6 @@ Inspections Lists (Compatibility)
 | Compatibility        | MktimeUsageInspection                           | 'gmmktime(...)'/'mktime(...)' usage                 | yes | yes | yes  | no  |
 | Compatibility        | FopenBinaryUnsafeUsageInspection                | Binary-unsafe 'fopen(...)' usage                    | yes | yes | yes  | no  |
 
-Inspections Lists (Confusing constructs)
----
-| Group                | Short Name                                      | Full Name                                           | QF  | UTs | QFTs | Doc |
-| :------------------- | :-------------------------------------------    | :-------------------------------------------------- | --: | --: | ---: | --: |
-| Confusing constructs | ClassMethodNameMatchesFieldNameInspection       | Method name matches existing field name             | n/a | yes | n/a  | no  |
-| Confusing constructs | NestedTernaryOperatorInspection                 | Nested ternary operator                             | n/a | yes | n/a  | no  |
-| Confusing constructs | UselessReturnInspection                         | Useless return                                      | yes | yes | yes  | no  |
-| Confusing constructs | ReferencingObjectsInspection                    | Referencing objects                                 | yes | yes | yes  | no  |
-
 Inspections Lists (Code style)
 ---
 | Group                | Short Name                                      | Full Name                                           | QF  | UTs | QFTs | Doc |
@@ -132,6 +123,10 @@ Inspections Lists (Code style)
 | Code Style           | StaticClosureCanBeUsedInspection                | Static closure can be used                          | yes | yes | yes  | no  |
 | Code Style           | ImplodeArgumentsOrderInspection                 | 'implode(...)' arguments order                      | yes | yes | yes  | no  |
 | Code Style           | ShortEchoTagCanBeUsedInspection                 | Short echo tag can be used                          | yes | yes | yes  | no  |
+| Code Style           | ClassMethodNameMatchesFieldNameInspection       | Method name matches existing field name             | n/a | yes | n/a  | no  |
+| Code Style           | NestedTernaryOperatorInspection                 | Nested ternary operator                             | n/a | yes | n/a  | no  |
+| Code Style           | UselessReturnInspection                         | Useless return                                      | yes | yes | yes  | no  |
+| Code Style           | ReferencingObjectsInspection                    | Referencing objects                                 | yes | yes | yes  | no  |
 
 Inspections Lists (Language level migration)
 ---

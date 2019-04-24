@@ -80,7 +80,6 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                 panel.addCheckbox("Prio 6: Language level migration", true, (isSelected) -> {});
                 panel.addCheckbox("Prio 7: Code style",               true, (isSelected) -> {});
                 panel.addCheckbox("Prio 8: Unused",                   true, (isSelected) -> {});
-                panel.addCheckbox("Prio ?: Confusing constructs",     true, (isSelected) -> {});
             });
         });
     }

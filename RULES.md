@@ -80,15 +80,6 @@ Inspections Lists (Unused)
 | Unused               | UnnecessaryIssetArgumentsInspection             | Unnecessary isset arguments specification           | yes | yes | yes  | no  |
 | Unused               | DateUsageInspection                             | Unnecessary 'date(...)' arguments specification     | yes | yes | yes  | no  |
 
-Inspections Lists (Compatibility)
----
-| Group                | Short Name                                      | Full Name                                           | QF  | UTs | QFTs | Doc |
-| :------------------- | :-------------------------------------------    | :-------------------------------------------------- | --: | --: | ---: | --: |
-| Compatibility        | DeprecatedIniOptionsInspection                  | Deprecated configuration options                    | n/a | yes | n/a  | no  |
-| Compatibility        | RandomApiMigrationInspection                    | Random API migration                                | yes | yes | yes  | no  |
-| Compatibility        | MktimeUsageInspection                           | 'gmmktime(...)'/'mktime(...)' usage                 | yes | yes | yes  | no  |
-| Compatibility        | FopenBinaryUnsafeUsageInspection                | Binary-unsafe 'fopen(...)' usage                    | yes | yes | yes  | no  |
-
 Inspections Lists (Code style)
 ---
 | Group                | Short Name                                      | Full Name                                           | QF  | UTs | QFTs | Doc |
@@ -127,6 +118,7 @@ Inspections Lists (Code style)
 | Code Style           | NestedTernaryOperatorInspection                 | Nested ternary operator                             | n/a | yes | n/a  | no  |
 | Code Style           | UselessReturnInspection                         | Useless return                                      | yes | yes | yes  | no  |
 | Code Style           | ReferencingObjectsInspection                    | Referencing objects                                 | yes | yes | yes  | no  |
+| Code Style           | FopenBinaryUnsafeUsageInspection                | Binary-unsafe 'fopen(...)' usage                    | yes | yes | yes  | no  |
 
 Inspections Lists (Language level migration)
 ---
@@ -152,6 +144,9 @@ Inspections Lists (Language level migration)
 | Language level migration | DynamicCallsToScopeIntrospectionInspection      | Deprecated dynamic calls to scope introspection     | n/a | yes | n/a  | no  |
 | Language level migration | UnsupportedEmptyListAssignmentsInspection       | Unsupported empty list assignments                  | n/a | yes | n/a  | no  |
 | Language level migration | YieldFromCanBeUsedInspection                    | 'yield from' can be used                            | yes | yes | yes  | no  |
+| Language level migration | DeprecatedIniOptionsInspection                  | Deprecated configuration options                    | n/a | yes | n/a  | no  |
+| Language level migration | RandomApiMigrationInspection                    | Random API migration                                | yes | yes | yes  | no  |
+| Language level migration | MktimeUsageInspection                           | 'gmmktime(...)'/'mktime(...)' usage                 | yes | yes | yes  | no  |
 
 Inspections Lists (Architecture)
 ---

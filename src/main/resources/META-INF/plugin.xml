@@ -837,6 +837,10 @@
         shortName="ReferencingObjectsInspection"                  displayName="Referencing objects"
         groupName="Code Style"                                    enabledByDefault="true" level="WARNING"
         implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.codeStyle.ReferencingObjectsInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="FopenBinaryUnsafeUsageInspection"              displayName="Binary-unsafe 'fopen(...)' usage"
+        groupName="Code Style"                                    enabledByDefault="true" level="WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.fileSystem.FopenBinaryUnsafeUsageInspector"/>
 
 
     <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
@@ -919,6 +923,18 @@
         shortName="YieldFromCanBeUsedInspection"                  displayName="'yield from' can be used"
         groupName="Language level migration"                      enabledByDefault="true" level="WARNING"
         implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.languageConstructions.YieldFromCanBeUsedInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="DeprecatedIniOptionsInspection"                displayName="Deprecated configuration options"
+        groupName="Compatibility"                                 enabledByDefault="true" level="WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.codeStyle.DeprecatedIniOptionsInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="RandomApiMigrationInspection"                  displayName="Random API migration"
+        groupName="Compatibility"                                 enabledByDefault="true" level="WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.deprecations.RandomApiMigrationInspector"/>
+    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
+        shortName="MktimeUsageInspection"                         displayName="'gmmktime(...)'/'mktime(...)' usage"
+        groupName="Compatibility"                                 enabledByDefault="true" level="WARNING"
+        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.deprecations.MktimeUsageInspector"/>
 
 
     <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
@@ -997,24 +1013,6 @@
         shortName="ExposingInternalClassesInspection"               displayName="Exposed @internal classes"
         groupName="Architecture"                                    enabledByDefault="true" level="WARNING"
         implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.semanticalAnalysis.classes.ExposingInternalClassesInspector"/>
-
-
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="DeprecatedIniOptionsInspection"                  displayName="Deprecated configuration options"
-        groupName="Compatibility"                                   enabledByDefault="true" level="WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.codeStyle.DeprecatedIniOptionsInspector"/>
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="RandomApiMigrationInspection"                    displayName="Random API migration"
-        groupName="Compatibility"                                   enabledByDefault="true" level="WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.deprecations.RandomApiMigrationInspector"/>
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="MktimeUsageInspection"                           displayName="'gmmktime(...)'/'mktime(...)' usage"
-        groupName="Compatibility"                                   enabledByDefault="true" level="WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.deprecations.MktimeUsageInspector"/>
-    <localInspection language="PHP" groupPath="PHP,Php Inspections (EA Ultimate)"
-        shortName="FopenBinaryUnsafeUsageInspection"                displayName="Binary-unsafe 'fopen(...)' usage"
-        groupName="Compatibility"                                   enabledByDefault="true" level="WARNING"
-        implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.fileSystem.FopenBinaryUnsafeUsageInspector"/>
 
 
     <applicationService      serviceInterface="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSettings"

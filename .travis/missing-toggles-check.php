@@ -51,9 +51,12 @@
                 $missingUltimateTogglesFiles[] = $file->getFilename();
             }
 
-            preg_match_all('/StrictnessCategory\.STRICTNESS_CATEGORY_\w+)/', $content, $strictnessToggles);
-            if (count(array_unique($strictnessToggles[0])) !== 1 || count($strictnessToggles[0]) !== $visitors) {
-                $inconsistentStrictnessToggles[] = $file->getFilename();
+            if ($visitors > 0) {
+                preg_match_all('/StrictnessCategory\.STRICTNESS_CATEGORY_\w+)/', $content, $strictnessToggles);
+                $strictnessTypes = (array) $strictnessToggles[0];
+                if (count(array_unique($strictnessTypes)) !== 1 || count($strictnessTypes) !== $visitors) {
+                    $inconsistentStrictnessToggles[] = $file->getFilename();
+                }
             }
         }
     }

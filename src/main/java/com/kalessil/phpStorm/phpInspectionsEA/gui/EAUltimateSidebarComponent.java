@@ -7,7 +7,9 @@ import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationConfiguration;
+import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectConfiguration;
 import com.kalessil.phpStorm.phpInspectionsEA.license.LicenseService;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.components.AbstractProjectComponent;
 
@@ -28,14 +30,14 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
 
     protected EAUltimateSidebarComponent(@NotNull Project project) {
         super(project);
-        this.windowManager = ToolWindowManager.getInstance(project);
+        windowManager = ToolWindowManager.getInstance(project);
     }
 
     @Override
     public void projectOpened() {
-        if (!this.isInstantiated()) {
-            final ToolWindow window = this.windowManager.registerToolWindow(TOOL_WINDOW_ID, this.buildPanel(), ToolWindowAnchor.RIGHT);
-            window.setIcon(new ImageIcon(this.getClass().getResource("/logo_15x15.png")));
+        if (!isInstantiated()) {
+            final ToolWindow window = windowManager.registerToolWindow(TOOL_WINDOW_ID, buildPanel(), ToolWindowAnchor.RIGHT);
+            window.setIcon(new ImageIcon(getClass().getResource("/logo_15x15.png")));
             window.setTitle("project settings");
         }
     }
@@ -64,34 +66,35 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
             component.addPanel("Settings management",         panel -> {
                 panel.addHyperlink(
                         "File / Settings / Php Inspections (EA Ultimate)",
-                        (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, EAUltimateApplicationConfiguration.class)
+                        (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, EAUltimateApplicationConfiguration.class)
                 );
                 panel.addHyperlink(
                         "File / Settings / Editor / Inspections",
-                        (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(this.myProject, "Inspections")
+                        (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, "Inspections")
                 );
             });
             component.addPanel("Strictness categories (loosest to strictest)", panel -> {
-                panel.addCheckbox("Prio 1: Security",                 true, (isSelected) -> {});
-                panel.addCheckbox("Prio 2: Probable bugs",            true, (isSelected) -> {});
-                panel.addCheckbox("Prio 3: Performance",              true, (isSelected) -> {});
-                panel.addCheckbox("Prio 4: Architecture",             true, (isSelected) -> {});
-                panel.addCheckbox("Prio 5: Control flow",             true, (isSelected) -> {});
-                panel.addCheckbox("Prio 6: Language level migration", true, (isSelected) -> {});
-                panel.addCheckbox("Prio 7: Code style",               true, (isSelected) -> {});
-                panel.addCheckbox("Prio 8: Unused",                   true, (isSelected) -> {});
+                final EAUltimateProjectConfiguration s = myProject.getComponent(EAUltimateProjectConfiguration.class);
+                panel.addCheckbox("Prio 1: Security",                 s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_SECURITY),                 (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_SECURITY, is));
+                panel.addCheckbox("Prio 2: Probable bugs",            s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS),            (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS, is));
+                panel.addCheckbox("Prio 3: Performance",              s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE),              (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE, is));
+                panel.addCheckbox("Prio 4: Architecture",             s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE),             (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE, is));
+                panel.addCheckbox("Prio 5: Control flow",             s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW),             (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW, is));
+                panel.addCheckbox("Prio 6: Language level migration", s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION), (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION, is));
+                panel.addCheckbox("Prio 7: Code style",               s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE),               (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE, is));
+                panel.addCheckbox("Prio 8: Unused",                   s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_UNUSED),                   (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_UNUSED, is));
             });
         });
     }
 
     @Override
     public void projectClosed() {
-        if (this.isInstantiated()) {
-            this.windowManager.unregisterToolWindow(TOOL_WINDOW_ID);
+        if (isInstantiated()) {
+            windowManager.unregisterToolWindow(TOOL_WINDOW_ID);
         }
     }
 
     private boolean isInstantiated() {
-        return this.windowManager.getToolWindow(TOOL_WINDOW_ID) != null;
+        return windowManager.getToolWindow(TOOL_WINDOW_ID) != null;
     }
 }

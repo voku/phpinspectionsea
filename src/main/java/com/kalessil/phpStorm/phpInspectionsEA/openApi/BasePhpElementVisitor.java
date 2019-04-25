@@ -1,5 +1,6 @@
 package com.kalessil.phpStorm.phpInspectionsEA.openApi;
 
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -8,6 +9,7 @@ import com.jetbrains.php.lang.psi.PhpFile;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.visitors.PhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateChangesTrackerComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectConfiguration;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSettings;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
@@ -125,16 +127,26 @@ public abstract class BasePhpElementVisitor extends PhpElementVisitor {
     }
 
     protected boolean shouldSkipAnalysis(@NotNull PsiElement target, @NotNull StrictnessCategory category) {
-        /* skip blade-files */
-        if (target.getContainingFile().getName().endsWith(".blade.php")) {
+        /* skip blade-files, as language injection there causes endless support requests */
+        final PsiFile file = target.getContainingFile();
+        if (file.getName().endsWith(".blade.php")) {
             return true;
         }
-        /* skip unchanged files if the plugin configured so */
-        if (EAUltimateSettings.getInstance().getCheckOnlyChangedFiles()) {
-            return !target.getProject()
-                    .getComponent(EAUltimateChangesTrackerComponent.class)
-                    .isChanged(target.getContainingFile().getVirtualFile());
+
+        final Project project                         = target.getProject();
+        final EAUltimateProjectConfiguration settings = project.getComponent(EAUltimateProjectConfiguration.class);
+        if (settings != null) {
+            /* skip inactive categories */
+            if (!settings.isCategoryActive(category)) {
+                return true;
+            }
+            /* skip un-changed files is we analyz only modified once */
+            if (settings.isAnalyzingOnlyModifiedFiles()) {
+                final EAUltimateChangesTrackerComponent tracker = project.getComponent(EAUltimateChangesTrackerComponent.class);
+                return tracker != null && tracker.isChanged(file.getVirtualFile());
+            }
         }
+
         return false;
     }
 }

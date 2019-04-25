@@ -21,14 +21,14 @@ import java.util.*;
  * file that was distributed with this source code.
  */
 
-@State(name = "EAUltimateProjectSettings", storages = @Storage(file = "$PROJECT_CONFIG_DIR$/ea_ultimate.xml"))
+@State(name = "EAUltimateProjectSettings", storages = @Storage("$PROJECT_CONFIG_DIR$/php_inspections_ea_ultimate.xml"))
 public class EAUltimateProjectConfiguration extends AbstractProjectComponent implements PersistentStateComponent<Element> {
     private boolean analyzeOnlyModifiedFiles            = false;
     private Map<StrictnessCategory, Boolean> categories = new LinkedHashMap<>();
 
-    protected EAUltimateProjectConfiguration(Project project) {
+    protected EAUltimateProjectConfiguration(@NotNull Project project) {
         super(project);
-        Arrays.stream(StrictnessCategory.values()).forEach(category -> this.categories.put(category, true));
+        Arrays.stream(StrictnessCategory.values()).forEach(category -> categories.put(category, true));
     }
 
     @Nullable
@@ -72,5 +72,21 @@ public class EAUltimateProjectConfiguration extends AbstractProjectComponent imp
                 analyzeOnlyModifiedFiles = "yes".equals(analyzeOnlyModifiedFilesNode.getAttributeValue("enabled"));
             }
         }
+    }
+
+    public boolean isCategoryActive(@NotNull StrictnessCategory category) {
+        return categories.containsKey(category) && categories.get(category);
+    }
+
+    public void setCategoryActiveFlag(@NotNull StrictnessCategory category, boolean value) {
+        categories.put(category, value);
+    }
+
+    public boolean isAnalyzingOnlyModifiedFiles() {
+        return analyzeOnlyModifiedFiles;
+    }
+
+    public void setAnalyzingOnlyModifiedFiles(boolean value) {
+        analyzeOnlyModifiedFiles = value;
     }
 }

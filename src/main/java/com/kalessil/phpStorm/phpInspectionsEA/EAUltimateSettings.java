@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-@State(name = "EAUltimateSettings", storages = @Storage(file = "$APP_CONFIG$/ea_ultimate.xml"))
+@State(name = "EAUltimateApplicationSettings", storages = @Storage(file = "$APP_CONFIG$/ea_ultimate.xml"))
 public class EAUltimateSettings implements PersistentStateComponent<Element> {
     private ComparisonStyle comparisonStyle;
 

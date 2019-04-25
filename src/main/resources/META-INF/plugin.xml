@@ -1033,9 +1033,11 @@
           <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateChangesTrackerComponent</implementation-class>
       </component>
       <component>
+          <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectConfiguration</implementation-class>
+      </component>
+      <component>
           <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.gui.EAUltimateSidebarComponent</implementation-class>
       </component>
-
   </project-components>
 
   <actions>

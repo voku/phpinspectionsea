@@ -43,9 +43,9 @@
     foreach ($ultimateDefinitions as $className => $definition) {
         $extendedDefinition = isset($extendedDefinitions[$className]) ? $extendedDefinitions[$className] : [];
         if ((array)$definition != (array)$extendedDefinition) {
-            $status = ($extendedDefinition === []) ? 'new' : 'enhanced';
+            $status = ($extendedDefinition === []) ? 'new' : ($definition->toggle ? 'enhanced' : 'relocated');
             if (!isset($statistics[$definition->groupName])) {
-                $statistics[$definition->groupName] = ['new' => 0, 'enhanced' => 0];
+                $statistics[$definition->groupName] = ['new' => 0, 'enhanced' => 0, 'relocated' => 0];
             }
             if ($status === 'new' && !$definition->toggle) {
                 echo sprintf('%s misses ultimate toggles: ', $className), PHP_EOL;

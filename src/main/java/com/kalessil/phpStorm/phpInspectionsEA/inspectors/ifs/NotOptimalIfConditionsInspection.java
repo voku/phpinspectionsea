@@ -17,6 +17,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.inspectors.ifs.utils.ExpressionsCo
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.*;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.hierarhy.InterfacesExtractUtil;
 import org.jetbrains.annotations.NotNull;
@@ -75,7 +76,7 @@ public class NotOptimalIfConditionsInspection extends BasePhpInspection {
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
         return new BasePhpElementVisitor() {
             public void visitPhpIf(If ifStatement) {
-                if (this.isContainingFileSkipped(ifStatement)) { return; }
+                if (this.isContainingFileSkipped(ifStatement, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final List<PsiElement> objAllConditions = new ArrayList<>();
                 final IElementType[] arrOperationHolder = { null };

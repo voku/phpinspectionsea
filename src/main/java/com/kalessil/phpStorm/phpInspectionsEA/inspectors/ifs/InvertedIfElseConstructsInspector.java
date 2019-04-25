@@ -13,6 +13,7 @@ import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.PhpLanguageUtil;
@@ -42,7 +43,7 @@ public class InvertedIfElseConstructsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpElse(@NotNull Else elseStatement) {
-                if (this.isContainingFileSkipped(elseStatement)) { return; }
+                if (this.isContainingFileSkipped(elseStatement, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement elseBody = elseStatement.getStatement();
                 if (elseBody instanceof GroupStatement) {

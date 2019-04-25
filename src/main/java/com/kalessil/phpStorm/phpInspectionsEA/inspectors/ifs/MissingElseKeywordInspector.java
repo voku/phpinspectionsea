@@ -10,6 +10,7 @@ import com.jetbrains.php.lang.psi.elements.If;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -35,8 +36,8 @@ public class MissingElseKeywordInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIf(@NotNull If expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(expression))             { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 /* get through previous space to if-statement */
                 PsiElement previous = expression.getPrevSibling();

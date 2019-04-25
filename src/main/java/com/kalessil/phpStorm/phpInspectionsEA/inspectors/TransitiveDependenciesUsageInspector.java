@@ -23,6 +23,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.indexers.ComposerPackageRelationIn
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -64,8 +65,8 @@ public class TransitiveDependenciesUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClassReference(@NotNull ClassReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(reference))              { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 if (this.isTarget(reference) && !this.isTestContext(reference)) {
                     final Project project    = holder.getProject();

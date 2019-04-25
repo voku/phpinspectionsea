@@ -10,6 +10,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.inspectors.semanticalAnalysis.clas
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.semanticalAnalysis.classes.lowerAccessLevel.strategy.ProtectedMembersOfFinalClassStrategy;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -34,24 +35,24 @@ public class LowerAccessLevelInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpField(@NotNull Field field) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(field))                  { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
+                if (this.isContainingFileSkipped(field, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 ProtectedMembersOfFinalClassStrategy.apply(field, problemsHolder);
             }
 
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(method))                 { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
+                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 ProtectedMembersOfFinalClassStrategy.apply(method, problemsHolder);
             }
 
             @Override
             public void visitPhpClass(@NotNull PhpClass clazz) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(clazz))                  { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
+                if (this.isContainingFileSkipped(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 PropertyUsedInPrivateContextStrategy.apply(clazz, problemsHolder);
             }

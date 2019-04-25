@@ -20,6 +20,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.inspectors.ifs.utils.ExpressionCos
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.Types;
@@ -58,8 +59,8 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(method))                 { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
+                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 if (!method.isAbstract()) {
                     this.analyzeFunction(method);
@@ -68,8 +69,8 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(function))               { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                  { return; }
+                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 this.analyzeFunction(function);
             }
@@ -98,8 +99,8 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignment) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(assignment))             { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.isContainingFileSkipped(assignment, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 /* because this hook fired e.g. for `.=` assignments (a BC break by PhpStorm) */
                 if (OpenapiTypesUtil.isAssignment(assignment)) {

@@ -8,6 +8,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.semanticalAnalysis.binaryOperations.strategy.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -35,8 +36,8 @@ public class SuspiciousBinaryOperationInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(expression))             { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final Collection<BooleanSupplier> callbacks = new ArrayList<>(11);
                 callbacks.add(() -> InstanceOfTraitStrategy.apply(expression, holder));
@@ -69,8 +70,8 @@ public class SuspiciousBinaryOperationInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(reference))              { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                          { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 ConstantConditionsIsNumericStrategy.apply(reference, holder);
             }

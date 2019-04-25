@@ -16,6 +16,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiEquivalenceUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
@@ -38,7 +39,7 @@ public class MissingArrayInitializationInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpArrayAccessExpression(@NotNull ArrayAccessExpression expression) {
-                if (this.isContainingFileSkipped(expression)) { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final ArrayIndex index = expression.getIndex();
                 if (index != null && index.getValue() == null) {

@@ -11,6 +11,7 @@ import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiEquivalenceUtil;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +45,7 @@ public class NestedPositiveIfStatementsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIf(@NotNull If expression) {
-                if (this.isContainingFileSkipped(expression)) { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement parent = expression.getParent();
                 if (parent instanceof GroupStatement) {

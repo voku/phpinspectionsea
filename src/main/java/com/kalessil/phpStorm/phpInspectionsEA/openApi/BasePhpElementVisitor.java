@@ -125,10 +125,6 @@ public abstract class BasePhpElementVisitor extends PhpElementVisitor {
     }
 
     protected boolean isContainingFileSkipped(@NotNull PsiElement target, @NotNull StrictnessCategory category) {
-        return this.isContainingFileSkipped(target);
-    }
-
-    protected boolean isContainingFileSkipped(@NotNull PsiElement target) {
         /* skip blade-files */
         if (target.getContainingFile().getName().endsWith(".blade.php")) {
             return true;

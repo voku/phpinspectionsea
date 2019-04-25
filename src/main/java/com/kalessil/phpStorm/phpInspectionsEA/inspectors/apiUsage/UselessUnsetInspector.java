@@ -14,6 +14,7 @@ import com.jetbrains.php.lang.psi.elements.Parameter;
 import com.jetbrains.php.lang.psi.elements.PhpUnset;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,13 +33,13 @@ public class UselessUnsetInspector extends BasePhpInspection {
         /* foreach is also a case, but there is no way to get flow entry point in actual JB platform API */
         return new BasePhpElementVisitor() {
             public void visitPhpMethod(Method method) {
-                if (this.isContainingFileSkipped(method)) { return; }
+                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 this.inspectUsages(method.getParameters(), method);
             }
 
             public void visitPhpFunction(Function function) {
-                if (this.isContainingFileSkipped(function)) { return; }
+                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 this.inspectUsages(function.getParameters(), function);
             }

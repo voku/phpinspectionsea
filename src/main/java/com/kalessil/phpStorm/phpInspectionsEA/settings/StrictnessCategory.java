@@ -11,8 +11,7 @@ public enum StrictnessCategory {
     STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION("Language level migration"),
     STRICTNESS_CATEGORY_CODE_STYLE("Code style"),
     STRICTNESS_CATEGORY_UNUSED("Unused"),
-
-    STRICTNESS_CATEGORY_CONFUSING_CONSTRUCTS("Confusing constructs");
+    STRICTNESS_CATEGORY_PHPUNIT("PhpUnit");
 
     private final String value;
 

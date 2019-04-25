@@ -41,7 +41,7 @@ public class AdditionOperationOnArraysInspection extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PsiElement operation = expression.getOperation();
                 if (OpenapiTypesUtil.is(operation, PhpTokenTypes.opPLUS)) {
@@ -66,7 +66,7 @@ public class AdditionOperationOnArraysInspection extends BasePhpInspection {
 
             @Override
             public void visitPhpSelfAssignmentExpression(@NotNull SelfAssignmentExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PsiElement operation = expression.getOperation();
                 if (OpenapiTypesUtil.is(operation, PhpTokenTypes.opPLUS_ASGN)) {

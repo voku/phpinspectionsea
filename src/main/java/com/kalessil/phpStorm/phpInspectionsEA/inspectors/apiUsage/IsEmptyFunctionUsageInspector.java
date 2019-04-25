@@ -12,6 +12,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.ComparisonStyle;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +49,7 @@ public class IsEmptyFunctionUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpEmpty(@NotNull PhpEmpty emptyExpression) {
-                if (this.isContainingFileSkipped(emptyExpression)) { return; }
+                if (this.isContainingFileSkipped(emptyExpression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PhpExpression[] values = emptyExpression.getVariables();
                 if (values.length == 1) {

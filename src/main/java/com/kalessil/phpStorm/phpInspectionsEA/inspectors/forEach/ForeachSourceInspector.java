@@ -58,7 +58,7 @@ public class ForeachSourceInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement foreach) {
-                if (this.isContainingFileSkipped(foreach, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(foreach, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PsiElement source = ExpressionSemanticUtil.getExpressionTroughParenthesis(foreach.getArray());
                 if (source instanceof PhpTypedElement) {

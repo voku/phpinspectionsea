@@ -39,7 +39,7 @@ public class MissingArrayInitializationInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpArrayAccessExpression(@NotNull ArrayAccessExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final ArrayIndex index = expression.getIndex();
                 if (index != null && index.getValue() == null) {

@@ -47,7 +47,7 @@ public class ClassConstantUsageCorrectnessInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClassConstantReference(@NotNull ClassConstantReference constantReference) {
-                if (this.isContainingFileSkipped(constantReference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(constantReference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String constantName = constantReference.getName();
                 if (constantName != null && constantName.equals("class")) {

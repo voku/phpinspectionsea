@@ -45,7 +45,7 @@ public class MockingMethodsCorrectnessInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
 
                 final String methodName = reference.getName();
                 if (methodName != null) {

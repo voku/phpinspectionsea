@@ -51,7 +51,7 @@ public class PropertyInitializationFlawsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpField(@NotNull Field field) {
-                if (this.isContainingFileSkipped(field, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
+                if (this.shouldSkipAnalysis(field, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 if (REPORT_DEFAULTS_FLAWS && !field.isConstant()) {
                     final PhpClass clazz       = field.getContainingClass();
@@ -107,7 +107,7 @@ public class PropertyInitializationFlawsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 /* configuration-based toggle */
                 if (!REPORT_INIT_FLAWS) {

@@ -36,7 +36,7 @@ public class SuspiciousSemicolonInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpStatement(@NotNull Statement statement) {
-                if (this.isContainingFileSkipped(statement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(statement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 if (statement.getChildren().length == 0) {
                     final PsiElement parent = statement.getParent();

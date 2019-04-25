@@ -46,8 +46,8 @@ public class RepetitiveMethodCallsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final IElementType operation = expression.getOperationType();
                 if (operation == PhpTokenTypes.opAND || operation == PhpTokenTypes.opOR) {
@@ -90,8 +90,8 @@ public class RepetitiveMethodCallsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpArrayCreationExpression(@NotNull ArrayCreationExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 /* extract base method references */
                 final List<MethodReference> references = new ArrayList<>();
@@ -125,8 +125,8 @@ public class RepetitiveMethodCallsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpTernaryExpression(@NotNull TernaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 if (!expression.isShort()) {
                     PsiElement base = ExpressionSemanticUtil.getExpressionTroughParenthesis(expression.getCondition());
@@ -154,8 +154,8 @@ public class RepetitiveMethodCallsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                        { return; }
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                   { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final PsiElement currentBase = reference.getFirstChild();
                 if (currentBase instanceof MethodReference) {

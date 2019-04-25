@@ -59,7 +59,7 @@ public class SuspiciousTernaryOperatorInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpTernaryExpression(@NotNull TernaryExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PsiElement condition    = ExpressionSemanticUtil.getExpressionTroughParenthesis(expression.getCondition());
                 final PsiElement trueVariant  = ExpressionSemanticUtil.getExpressionTroughParenthesis(expression.getTrueVariant());

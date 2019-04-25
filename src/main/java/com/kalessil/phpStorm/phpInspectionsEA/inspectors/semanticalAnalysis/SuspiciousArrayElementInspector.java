@@ -37,8 +37,8 @@ public class SuspiciousArrayElementInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpArrayCreationExpression(@NotNull ArrayCreationExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 for (final ArrayHashElement element : expression.getHashElements()) {
                     final PsiElement key = element.getKey();

@@ -47,8 +47,8 @@ public class InterfacesAsConstructorDependenciesInspector extends BasePhpInspect
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                 { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final String methodName = method.getName();
                 if (methodName.equals("__construct")) {

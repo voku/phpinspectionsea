@@ -45,7 +45,7 @@ public class NestedPositiveIfStatementsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIf(@NotNull If expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement parent = expression.getParent();
                 if (parent instanceof GroupStatement) {

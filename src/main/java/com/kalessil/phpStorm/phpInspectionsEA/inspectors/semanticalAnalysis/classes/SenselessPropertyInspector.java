@@ -42,8 +42,8 @@ public class SenselessPropertyInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClass(@NotNull PhpClass clazz) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
-                if (this.isContainingFileSkipped(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
+                if (this.shouldSkipAnalysis(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 if (!clazz.isInterface() && !clazz.isTrait()) {
                     final List<Field> fields = Stream.of(clazz.getOwnFields())

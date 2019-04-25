@@ -46,7 +46,7 @@ public class ClassOverridesFieldOfSuperClassInspector extends BasePhpInspection 
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
         return new BasePhpElementVisitor() {
             public void visitPhpField(Field ownField) {
-                if (this.isContainingFileSkipped(ownField, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (this.shouldSkipAnalysis(ownField, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 /* skip un-explorable and test classes */
                 final PhpClass clazz = ownField.getContainingClass();

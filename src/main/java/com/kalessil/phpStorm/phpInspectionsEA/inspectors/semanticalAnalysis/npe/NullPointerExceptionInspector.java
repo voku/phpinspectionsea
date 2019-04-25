@@ -34,8 +34,8 @@ public class NullPointerExceptionInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                       { return; }
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                  { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 if (!method.isAbstract() && !this.isTestContext(method)) {
                     NullableVariablesStrategy.applyToParameters(method, holder);
@@ -47,8 +47,8 @@ public class NullPointerExceptionInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 NullableVariablesStrategy.applyToParameters(function, holder);
                 NullableVariablesStrategy.applyToLocalVariables(function, holder);

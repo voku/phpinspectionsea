@@ -38,7 +38,7 @@ public class UnnecessaryParenthesesInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpParenthesizedExpression(@NotNull ParenthesizedExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 /* expression.getArgument() returns the first child, but it can be more */
                 final PsiElement[] children = expression.getChildren();

@@ -37,8 +37,8 @@ public class NonSecureArrayRandUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName != null && functionName.equals("array_rand")) {

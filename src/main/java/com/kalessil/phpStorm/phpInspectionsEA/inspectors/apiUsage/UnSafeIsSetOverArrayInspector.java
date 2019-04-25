@@ -53,7 +53,7 @@ public class UnSafeIsSetOverArrayInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIsset(@NotNull PhpIsset issetExpression) {
-                if (this.isContainingFileSkipped(issetExpression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(issetExpression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 /*
                  * if no parameters, we don't check;

@@ -44,8 +44,8 @@ public class IfReturnReturnSimplificationInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIf(@NotNull If statement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(statement, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(statement, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement condition = ExpressionSemanticUtil.getExpressionTroughParenthesis(statement.getCondition());
                 if (condition != null && this.isTargetCondition(condition) && statement.getElseIfBranches().length == 0) {

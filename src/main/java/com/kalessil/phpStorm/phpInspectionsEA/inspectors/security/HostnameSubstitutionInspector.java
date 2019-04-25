@@ -47,8 +47,8 @@ public class HostnameSubstitutionInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpArrayAccessExpression(@NotNull ArrayAccessExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                 { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final PsiElement variable = expression.getValue();
                 if (variable instanceof Variable && ((Variable) variable).getName().equals("_SERVER")) {

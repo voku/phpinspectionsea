@@ -65,8 +65,8 @@ public class TransitiveDependenciesUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClassReference(@NotNull ClassReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 if (this.isTarget(reference) && !this.isTestContext(reference)) {
                     final Project project    = holder.getProject();

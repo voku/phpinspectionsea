@@ -111,7 +111,7 @@ public class UnusedConstructorDependenciesInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 /* filter classes which needs to be analyzed */
                 final PhpClass clazz = method.getContainingClass();

@@ -53,7 +53,7 @@ public class ProperNullCoalescingOperatorUsageInspector extends BasePhpInspectio
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression binary) {
-                if (this.isContainingFileSkipped(binary, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(binary, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 if (binary.getOperationType() == PhpTokenTypes.opCOALESCE) {
                     final PsiElement left  = binary.getLeftOperand();

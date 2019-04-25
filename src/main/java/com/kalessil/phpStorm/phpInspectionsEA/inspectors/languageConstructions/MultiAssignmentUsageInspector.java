@@ -35,7 +35,7 @@ public class MultiAssignmentUsageInspector extends BasePhpInspection {
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BasePhpElementVisitor() {
             public void visitPhpMultiassignmentExpression(MultiassignmentExpression multiassignmentExpression) {
-                if (this.isContainingFileSkipped(multiassignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(multiassignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 /* ensure php version is at least PHP 5.5 */
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();
@@ -89,7 +89,7 @@ public class MultiAssignmentUsageInspector extends BasePhpInspection {
             }
 
             public void visitPhpAssignmentExpression(AssignmentExpression assignmentExpression) {
-                if (this.isContainingFileSkipped(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 /* ensure we are writing into a variable */
                 if (!(assignmentExpression.getVariable() instanceof Variable)){

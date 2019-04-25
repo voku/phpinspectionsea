@@ -34,7 +34,7 @@ public class DegradedSwitchInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpSwitch(@NotNull PhpSwitch expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PhpCase[] cases = expression.getCases();
                 if (cases.length == 0) {

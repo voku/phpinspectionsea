@@ -46,7 +46,7 @@ public class MultipleReturnStatementsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final PsiElement nameIdentifier = NamedElementUtil.getNameIdentifier(method);
                 if (nameIdentifier != null && !method.isAbstract()) {

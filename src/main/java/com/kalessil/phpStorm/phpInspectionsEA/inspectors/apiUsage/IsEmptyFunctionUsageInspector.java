@@ -49,7 +49,7 @@ public class IsEmptyFunctionUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpEmpty(@NotNull PhpEmpty emptyExpression) {
-                if (this.isContainingFileSkipped(emptyExpression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(emptyExpression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PhpExpression[] values = emptyExpression.getVariables();
                 if (values.length == 1) {

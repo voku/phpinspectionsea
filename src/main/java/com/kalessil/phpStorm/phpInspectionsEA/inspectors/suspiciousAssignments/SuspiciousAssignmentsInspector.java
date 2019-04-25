@@ -31,21 +31,21 @@ public class SuspiciousAssignmentsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpSwitch(@NotNull PhpSwitch switchStatement) {
-                if (this.isContainingFileSkipped(switchStatement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(switchStatement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 SwitchFallThroughStrategy.apply(switchStatement, holder);
             }
 
             @Override
             public void visitPhpSelfAssignmentExpression(@NotNull SelfAssignmentExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 SelfAssignmentStrategy.apply(expression, holder);
             }
 
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 if (!this.isTestContext(method)) {
                     ParameterImmediateOverrideStrategy.apply(method, holder);
@@ -54,7 +54,7 @@ public class SuspiciousAssignmentsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 if (!this.isTestContext(function)) {
                     ParameterImmediateOverrideStrategy.apply(function, holder);
@@ -63,7 +63,7 @@ public class SuspiciousAssignmentsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignment) {
-                if (this.isContainingFileSkipped(assignment, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(assignment, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 /* because this hook fired e.g. for `.=` assignments (a BC break by PhpStorm) */
                 if (OpenapiTypesUtil.isAssignment(assignment)) {

@@ -63,7 +63,7 @@ public class ClassMockingCorrectnessInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClass(@NotNull PhpClass clazz) {
-                if (this.isContainingFileSkipped(clazz, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(clazz, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PhpClass parent = OpenapiResolveUtil.resolveSuperClass(clazz);
                 if (parent != null && parent.getFQN().equals("\\PhpSpec\\ObjectBehavior")) {
@@ -83,7 +83,7 @@ public class ClassMockingCorrectnessInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String methodName      = reference.getName();
                 final PsiElement[] arguments = reference.getParameters();

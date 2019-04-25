@@ -36,8 +36,8 @@ public class MissingElseKeywordInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIf(@NotNull If expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 /* get through previous space to if-statement */
                 PsiElement previous = expression.getPrevSibling();

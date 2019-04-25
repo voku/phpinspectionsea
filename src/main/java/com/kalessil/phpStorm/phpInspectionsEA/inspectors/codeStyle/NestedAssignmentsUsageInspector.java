@@ -40,7 +40,7 @@ public class NestedAssignmentsUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement parent = expression.getParent();
                 if (!(parent instanceof AssignmentExpression) && expression.getValue() instanceof AssignmentExpression) {

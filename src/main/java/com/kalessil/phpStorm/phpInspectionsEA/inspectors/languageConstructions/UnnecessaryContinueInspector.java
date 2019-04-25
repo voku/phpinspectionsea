@@ -47,8 +47,8 @@ public class UnnecessaryContinueInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpContinue(@NotNull PhpContinue continueStatement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                 { return; }
-                if (this.isContainingFileSkipped(continueStatement, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                            { return; }
+                if (this.shouldSkipAnalysis(continueStatement, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 if (continueStatement.getArgument() == null) {
                     final PsiElement continuedStatement = this.getContinuedStatement(continueStatement);

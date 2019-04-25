@@ -43,7 +43,7 @@ public class InvertedIfElseConstructsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpElse(@NotNull Else elseStatement) {
-                if (this.isContainingFileSkipped(elseStatement, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(elseStatement, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement elseBody = elseStatement.getStatement();
                 if (elseBody instanceof GroupStatement) {

@@ -41,7 +41,7 @@ public class CurlSslServerSpoofingInspector extends LocalInspectionTool {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpConstantReference(@NotNull ConstantReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String constantName = reference.getName();
                 if (constantName != null && constantName.startsWith("CURLOPT_")) {

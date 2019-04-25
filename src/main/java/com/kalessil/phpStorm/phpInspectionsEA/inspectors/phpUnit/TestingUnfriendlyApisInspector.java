@@ -57,8 +57,8 @@ public class TestingUnfriendlyApisInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                 { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final PsiElement nameIdentifier = NamedElementUtil.getNameIdentifier(method);
                 if (nameIdentifier != null && !method.isAbstract() && this.isTestContext(method)) {

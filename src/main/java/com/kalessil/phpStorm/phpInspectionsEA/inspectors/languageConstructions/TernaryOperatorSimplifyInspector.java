@@ -55,8 +55,8 @@ public class TernaryOperatorSimplifyInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpTernaryExpression(@NotNull TernaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                          { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement condition = ExpressionSemanticUtil.getExpressionTroughParenthesis(expression.getCondition());
                 if (condition instanceof BinaryExpression) {

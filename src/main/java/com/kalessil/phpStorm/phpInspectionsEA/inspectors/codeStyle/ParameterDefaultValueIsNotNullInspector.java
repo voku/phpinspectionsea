@@ -42,14 +42,14 @@ public class ParameterDefaultValueIsNotNullInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.analyze(method);
             }
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(function, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.analyze(function);
             }

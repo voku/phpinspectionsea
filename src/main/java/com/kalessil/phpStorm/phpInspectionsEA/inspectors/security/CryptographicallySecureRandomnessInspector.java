@@ -49,7 +49,7 @@ public class CryptographicallySecureRandomnessInspector extends BasePhpInspectio
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName == null || (!functionName.equals("openssl_random_pseudo_bytes") && !functionName.equals("mcrypt_create_iv"))) {

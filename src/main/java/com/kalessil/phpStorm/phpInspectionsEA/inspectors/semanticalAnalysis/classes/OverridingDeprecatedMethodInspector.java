@@ -44,8 +44,8 @@ public class OverridingDeprecatedMethodInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName != null && functionName.equals("trigger_error")) {
@@ -75,8 +75,8 @@ public class OverridingDeprecatedMethodInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                 { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 /* do not process un-reportable classes and interfaces - we are searching real tech. debt here */
                 final PhpClass clazz      = method.getContainingClass();

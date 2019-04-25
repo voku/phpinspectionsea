@@ -130,7 +130,7 @@ public class UnqualifiedReferenceInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName != null && !functionName.isEmpty()) {
@@ -149,7 +149,7 @@ public class UnqualifiedReferenceInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpConstantReference(@NotNull ConstantReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final String constantName = reference.getName();
                 if (constantName != null && !constantName.isEmpty() && REPORT_CONSTANTS) {

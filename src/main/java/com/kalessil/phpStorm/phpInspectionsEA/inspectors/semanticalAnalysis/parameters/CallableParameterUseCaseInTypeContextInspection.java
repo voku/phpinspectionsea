@@ -58,8 +58,8 @@ public class CallableParameterUseCaseInTypeContextInspection extends BasePhpInsp
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                 { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 if (!method.isAbstract()) {
                     this.inspectUsages(method.getParameters(), method);
@@ -68,8 +68,8 @@ public class CallableParameterUseCaseInTypeContextInspection extends BasePhpInsp
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                        { return; }
-                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                   { return; }
+                if (this.shouldSkipAnalysis(function, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 this.inspectUsages(function.getParameters(), function);
             }

@@ -59,8 +59,8 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                           { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 if (!method.isAbstract()) {
                     this.analyzeFunction(method);
@@ -69,8 +69,8 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                  { return; }
-                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                             { return; }
+                if (this.shouldSkipAnalysis(function, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 this.analyzeFunction(function);
             }
@@ -99,8 +99,8 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignment) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
-                if (this.isContainingFileSkipped(assignment, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                               { return; }
+                if (this.shouldSkipAnalysis(assignment, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 /* because this hook fired e.g. for `.=` assignments (a BC break by PhpStorm) */
                 if (OpenapiTypesUtil.isAssignment(assignment)) {

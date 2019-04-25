@@ -40,8 +40,8 @@ public class UnnecessaryUseAliasInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpUse(@NotNull PhpUse expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                        { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                   { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 if (!expression.isTraitImport()) {
                     final String alias = expression.getAliasName();

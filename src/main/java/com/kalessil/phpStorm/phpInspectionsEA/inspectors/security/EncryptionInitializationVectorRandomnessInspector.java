@@ -50,7 +50,7 @@ public class EncryptionInitializationVectorRandomnessInspector extends BasePhpIn
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String functionName = reference.getName();
                 /* variable functions are not supported, as we are checking 2 different extensions functions */

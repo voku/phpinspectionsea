@@ -43,7 +43,7 @@ public class ShortListSyntaxCanBeUsedInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMultiassignmentExpression(@NotNull MultiassignmentExpression assignment) {
-                if (this.isContainingFileSkipped(assignment, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
+                if (this.shouldSkipAnalysis(assignment, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 /* ensure php version is at least PHP 7.1 */
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();
@@ -61,7 +61,7 @@ public class ShortListSyntaxCanBeUsedInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement foreach) {
-                if (this.isContainingFileSkipped(foreach, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
+                if (this.shouldSkipAnalysis(foreach, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 /* ensure php version is at least PHP 7.1 */
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();

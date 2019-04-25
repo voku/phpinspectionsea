@@ -62,8 +62,8 @@ public class SuspiciousLoopInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement statement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                          { return; }
-                if (this.isContainingFileSkipped(statement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
+                if (this.shouldSkipAnalysis(statement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.inspectVariables(statement);
                 this.inspectParentConditions(statement, statement.getArray());
@@ -72,8 +72,8 @@ public class SuspiciousLoopInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFor(@NotNull For statement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
-                if (this.isContainingFileSkipped(statement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
+                if (this.shouldSkipAnalysis(statement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.inspectConditions(statement);
                 this.inspectVariables(statement);

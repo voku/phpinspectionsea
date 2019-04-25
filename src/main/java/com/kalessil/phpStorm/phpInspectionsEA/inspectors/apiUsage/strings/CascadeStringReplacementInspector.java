@@ -62,8 +62,8 @@ public class CascadeStringReplacementInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpReturn(@NotNull PhpReturn returnStatement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                              { return; }
-                if (this.isContainingFileSkipped(returnStatement, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
+                if (this.shouldSkipAnalysis(returnStatement, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final FunctionReference functionCall = this.getFunctionReference(returnStatement);
                 if (functionCall != null) {
@@ -73,8 +73,8 @@ public class CascadeStringReplacementInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignmentExpression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                   { return; }
-                if (this.isContainingFileSkipped(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                              { return; }
+                if (this.shouldSkipAnalysis(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final FunctionReference functionCall = this.getFunctionReference(assignmentExpression);
                 if (functionCall != null) {

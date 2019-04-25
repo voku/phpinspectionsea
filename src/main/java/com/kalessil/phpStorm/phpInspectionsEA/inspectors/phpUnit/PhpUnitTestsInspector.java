@@ -68,7 +68,7 @@ public class PhpUnitTestsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
 
                 final PhpClass clazz       = method.getContainingClass();
                 final PsiElement nameNode  = NamedElementUtil.getNameIdentifier(method);
@@ -188,7 +188,7 @@ public class PhpUnitTestsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
 
                 final String methodName = reference.getName();
                 if (methodName != null) {

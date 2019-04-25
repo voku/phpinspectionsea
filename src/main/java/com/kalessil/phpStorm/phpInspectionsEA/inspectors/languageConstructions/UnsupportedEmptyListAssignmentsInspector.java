@@ -39,7 +39,7 @@ public class UnsupportedEmptyListAssignmentsInspector extends BasePhpInspection 
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();
                 if (php.compareTo(PhpLanguageLevel.PHP700) >= 0 && expression.getVariables().isEmpty()) {
@@ -69,7 +69,7 @@ public class UnsupportedEmptyListAssignmentsInspector extends BasePhpInspection 
 
             @Override
             public void visitPhpMultiassignmentExpression(@NotNull MultiassignmentExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();
                 if (php.compareTo(PhpLanguageLevel.PHP700) >= 0 && expression.getVariables().isEmpty()) {

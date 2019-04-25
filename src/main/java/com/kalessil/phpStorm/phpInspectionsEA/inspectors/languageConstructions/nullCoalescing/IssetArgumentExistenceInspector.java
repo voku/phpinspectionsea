@@ -54,8 +54,8 @@ public class IssetArgumentExistenceInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PsiElement argument = expression.getLeftOperand();
                 if (argument != null && PhpTokenTypes.opCOALESCE == expression.getOperationType()) {
@@ -65,16 +65,16 @@ public class IssetArgumentExistenceInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpEmpty(@NotNull PhpEmpty expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.analyzeArgumentsExistence(expression.getVariables());
             }
 
             @Override
             public void visitPhpIsset(@NotNull PhpIsset expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.analyzeArgumentsExistence(expression.getVariables());
             }

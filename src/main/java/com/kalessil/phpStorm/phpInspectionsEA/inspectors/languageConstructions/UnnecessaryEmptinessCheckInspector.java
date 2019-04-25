@@ -77,8 +77,8 @@ public class UnnecessaryEmptinessCheckInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIsset(@NotNull PhpIsset isset) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
-                if (this.isContainingFileSkipped(isset, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
+                if (this.shouldSkipAnalysis(isset, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 if (SUGGEST_SIMPLIFICATIONS) {
                     final PsiElement[] arguments = isset.getVariables();
@@ -114,8 +114,8 @@ public class UnnecessaryEmptinessCheckInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                          { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final IElementType operator = expression.getOperationType();
                 if (operator == PhpTokenTypes.opAND || operator == PhpTokenTypes.opOR) {

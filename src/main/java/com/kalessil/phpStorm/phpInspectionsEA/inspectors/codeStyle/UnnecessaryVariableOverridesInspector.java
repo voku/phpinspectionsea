@@ -41,8 +41,8 @@ public class UnnecessaryVariableOverridesInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignment) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                          { return; }
-                if (this.isContainingFileSkipped(assignment, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
+                if (this.shouldSkipAnalysis(assignment, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement parent = assignment.getParent();
                 if (OpenapiTypesUtil.isStatementImpl(parent)) {

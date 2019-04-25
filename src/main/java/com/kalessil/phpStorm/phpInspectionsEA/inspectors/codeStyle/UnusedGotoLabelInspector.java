@@ -43,7 +43,7 @@ public class UnusedGotoLabelInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpGotoLabel(@NotNull PhpGotoLabel label) {
-                if (this.isContainingFileSkipped(label, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
+                if (this.shouldSkipAnalysis(label, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 final Function function   = ExpressionSemanticUtil.getScope(label);
                 final GroupStatement body = null == function ? null : ExpressionSemanticUtil.getGroupStatement(function);

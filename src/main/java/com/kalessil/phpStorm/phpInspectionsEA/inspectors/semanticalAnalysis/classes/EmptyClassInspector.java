@@ -35,7 +35,7 @@ public class EmptyClassInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClass(@NotNull PhpClass clazz) {
-                if (this.isContainingFileSkipped(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (this.shouldSkipAnalysis(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final PsiElement nameNode = NamedElementUtil.getNameIdentifier(clazz);
                 if (nameNode != null) {

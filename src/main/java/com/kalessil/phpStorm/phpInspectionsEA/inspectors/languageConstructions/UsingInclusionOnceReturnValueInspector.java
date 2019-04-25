@@ -39,7 +39,7 @@ public class UsingInclusionOnceReturnValueInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpInclude(@NotNull Include include) {
-                if (this.isContainingFileSkipped(include, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (this.shouldSkipAnalysis(include, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PsiElement parent = include.getParent();
                 if (parent instanceof ControlStatement || !OpenapiTypesUtil.isStatementImpl(parent)) {

@@ -48,8 +48,8 @@ public class UnnecessaryIssetArgumentsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIsset(@NotNull PhpIsset issetExpression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(issetExpression, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(issetExpression, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 final PsiElement[] arguments = issetExpression.getVariables();
                 if (arguments.length > 1) {

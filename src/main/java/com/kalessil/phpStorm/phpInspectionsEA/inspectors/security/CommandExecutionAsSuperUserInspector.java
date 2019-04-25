@@ -34,8 +34,8 @@ public class CommandExecutionAsSuperUserInspector extends LocalInspectionTool {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpStringLiteralExpression(@NotNull StringLiteralExpression literal) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                   { return; }
-                if (this.isContainingFileSkipped(literal, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                              { return; }
+                if (this.shouldSkipAnalysis(literal, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String content = literal.getContents();
                 if (content.length() >= 3) {
@@ -48,8 +48,8 @@ public class CommandExecutionAsSuperUserInspector extends LocalInspectionTool {
 
             @Override
             public void visitPhpShellCommand(@NotNull PhpShellCommandExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                 { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String content = expression.getText();
                 if (content.length() >= 5) {

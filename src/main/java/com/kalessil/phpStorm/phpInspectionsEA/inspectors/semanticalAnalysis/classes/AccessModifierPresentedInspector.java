@@ -52,7 +52,7 @@ public class AccessModifierPresentedInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClass(@NotNull PhpClass clazz) {
-                if (this.isContainingFileSkipped(clazz, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(clazz, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 /* community request: interfaces have only public methods, what is default access levels */
                 if (!ANALYZE_INTERFACES && clazz.isInterface()) {

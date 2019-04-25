@@ -37,8 +37,8 @@ public class SuspiciousVariableDeclarationInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                       { return; }
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                  { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 if (!method.isAbstract()) {
                     this.inspect(method);
@@ -47,8 +47,8 @@ public class SuspiciousVariableDeclarationInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.inspect(function);
             }
@@ -73,8 +73,8 @@ public class SuspiciousVariableDeclarationInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpStaticStatement(@NotNull PhpStaticStatement staticStatement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                { return; }
-                if (this.isContainingFileSkipped(staticStatement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
+                if (this.shouldSkipAnalysis(staticStatement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final Function function = ExpressionSemanticUtil.getScope(staticStatement);
                 if (function != null) {

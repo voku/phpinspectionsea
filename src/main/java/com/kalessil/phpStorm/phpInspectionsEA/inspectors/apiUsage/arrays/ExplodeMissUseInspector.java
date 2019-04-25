@@ -54,8 +54,8 @@ public class ExplodeMissUseInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                        { return; }
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                   { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final String outerFunctionName = reference.getName();
                 if (outerFunctionName != null && argumentMapping.containsKey(outerFunctionName)) {

@@ -44,8 +44,8 @@ public class StaticLambdaBindingInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
-                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
+                if (this.shouldSkipAnalysis(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 if (OpenapiTypesUtil.isLambda(function) && OpenapiTypesUtil.is(function.getFirstChild(), PhpTokenTypes.kwSTATIC)) {
                     final GroupStatement body = ExpressionSemanticUtil.getGroupStatement(function);

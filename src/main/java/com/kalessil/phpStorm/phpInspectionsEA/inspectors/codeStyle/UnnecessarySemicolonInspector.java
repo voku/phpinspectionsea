@@ -38,7 +38,7 @@ public class UnnecessarySemicolonInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpStatement(@NotNull Statement statement) {
-                if (this.isContainingFileSkipped(statement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(statement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final boolean isBlade = holder.getFile().getName().endsWith(".blade.php");
                 if (!isBlade && statement.getChildren().length == 0) {
@@ -57,7 +57,7 @@ public class UnnecessarySemicolonInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpEchoStatement(PhpEchoStatement echo) {
-                if (this.isContainingFileSkipped(echo, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(echo, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 if (!OpenapiTypesUtil.is(echo.getFirstChild(), PhpTokenTypes.kwECHO)) {
                     final PsiElement last = echo.getLastChild();

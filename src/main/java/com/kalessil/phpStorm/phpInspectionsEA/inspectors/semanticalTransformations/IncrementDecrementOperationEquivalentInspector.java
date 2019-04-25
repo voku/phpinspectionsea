@@ -68,7 +68,7 @@ public class IncrementDecrementOperationEquivalentInspector extends BasePhpInspe
 
             @Override
             public void visitPhpSelfAssignmentExpression(@NotNull SelfAssignmentExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final IElementType operation = expression.getOperationType();
                 final PhpPsiElement value    = expression.getValue();
@@ -94,7 +94,7 @@ public class IncrementDecrementOperationEquivalentInspector extends BasePhpInspe
 
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignmentExpression) {
-                if (this.isContainingFileSkipped(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PhpPsiElement variable = assignmentExpression.getVariable();
                 if (variable != null && assignmentExpression.getValue() instanceof BinaryExpression) {

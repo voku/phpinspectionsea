@@ -43,7 +43,7 @@ public class DisallowWritingIntoStaticPropertiesInspector extends BasePhpInspect
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignmentExpression) {
-                if (this.isContainingFileSkipped(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement candidate = assignmentExpression.getVariable();
                 if (candidate instanceof FieldReference) {

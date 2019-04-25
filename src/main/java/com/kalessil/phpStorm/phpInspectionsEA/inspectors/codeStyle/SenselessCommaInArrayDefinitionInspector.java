@@ -38,7 +38,7 @@ public class SenselessCommaInArrayDefinitionInspector extends BasePhpInspection 
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpArrayCreationExpression(@NotNull ArrayCreationExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement last      = expression.getLastChild().getPrevSibling();
                 final PsiElement candidate = last instanceof PsiWhiteSpace ? last.getPrevSibling() : last;

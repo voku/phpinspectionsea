@@ -49,7 +49,7 @@ public class LoopWhichDoesNotLoopInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement loop) {
-                if (this.isContainingFileSkipped(loop, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(loop, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 if (this.isNotLooping(loop)) {
                     /* false-positive: return first element from generator, iterable and co */
@@ -73,7 +73,7 @@ public class LoopWhichDoesNotLoopInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFor(@NotNull For loop) {
-                if (this.isContainingFileSkipped(loop, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(loop, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 if (this.isNotLooping(loop)) {
                     holder.registerProblem(loop.getFirstChild(), message);
@@ -82,7 +82,7 @@ public class LoopWhichDoesNotLoopInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpWhile(@NotNull While loop) {
-                if (this.isContainingFileSkipped(loop, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(loop, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 if (this.isNotLooping(loop)) {
                     holder.registerProblem(loop.getFirstChild(), message);
@@ -91,7 +91,7 @@ public class LoopWhichDoesNotLoopInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpDoWhile(@NotNull DoWhile loop) {
-                if (this.isContainingFileSkipped(loop, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
+                if (this.shouldSkipAnalysis(loop, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 if (this.isNotLooping(loop)) {
                     holder.registerProblem(loop.getFirstChild(), message);

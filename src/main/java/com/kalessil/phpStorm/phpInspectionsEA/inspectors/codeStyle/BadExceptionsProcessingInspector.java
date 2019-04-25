@@ -39,8 +39,8 @@ public class BadExceptionsProcessingInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpTry(@NotNull Try tryStatement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                            { return; }
-                if (this.isContainingFileSkipped(tryStatement, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                       { return; }
+                if (this.shouldSkipAnalysis(tryStatement, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final GroupStatement body = ExpressionSemanticUtil.getGroupStatement(tryStatement);
                 if (body != null) {
@@ -56,8 +56,8 @@ public class BadExceptionsProcessingInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpCatch(@NotNull Catch catchStatement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                              { return; }
-                if (this.isContainingFileSkipped(catchStatement, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
+                if (this.shouldSkipAnalysis(catchStatement, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final Variable variable = catchStatement.getException();
                 if (variable != null) {

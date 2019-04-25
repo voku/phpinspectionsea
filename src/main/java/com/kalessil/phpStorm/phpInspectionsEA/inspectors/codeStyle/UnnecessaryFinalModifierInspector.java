@@ -38,7 +38,7 @@ public class UnnecessaryFinalModifierInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 if (method.isFinal()) {
                     final PhpClass clazz = method.getContainingClass();

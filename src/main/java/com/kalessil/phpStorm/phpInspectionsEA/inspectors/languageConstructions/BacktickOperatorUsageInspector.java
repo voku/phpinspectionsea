@@ -34,7 +34,7 @@ public class BacktickOperatorUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpShellCommand(@NotNull PhpShellCommandExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String raw = expression.getText();
                 if (raw.length() > 2) {

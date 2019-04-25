@@ -39,7 +39,7 @@ public class ShortOpenTagUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpGroupStatement(@NotNull GroupStatement groupStatement) {
-                if (this.isContainingFileSkipped(groupStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(groupStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement last = groupStatement.getLastChild();
                 if (last instanceof LeafPsiElement) {
@@ -49,7 +49,7 @@ public class ShortOpenTagUsageInspector extends BasePhpInspection {
 
             @Override
             public void visitWhiteSpace(@NotNull PsiWhiteSpace space) {
-                if (this.isContainingFileSkipped(space, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(space, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement previous = space.getPrevSibling();
                 if (previous instanceof LeafPsiElement) {

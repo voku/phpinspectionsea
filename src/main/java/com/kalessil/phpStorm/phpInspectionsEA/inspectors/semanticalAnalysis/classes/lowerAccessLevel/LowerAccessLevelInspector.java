@@ -35,24 +35,24 @@ public class LowerAccessLevelInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpField(@NotNull Field field) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
-                if (this.isContainingFileSkipped(field, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
+                if (this.shouldSkipAnalysis(field, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 ProtectedMembersOfFinalClassStrategy.apply(field, problemsHolder);
             }
 
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
-                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                 { return; }
+                if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 ProtectedMembersOfFinalClassStrategy.apply(method, problemsHolder);
             }
 
             @Override
             public void visitPhpClass(@NotNull PhpClass clazz) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
-                if (this.isContainingFileSkipped(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
+                if (this.shouldSkipAnalysis(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 PropertyUsedInPrivateContextStrategy.apply(clazz, problemsHolder);
             }

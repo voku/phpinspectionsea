@@ -48,7 +48,7 @@ public class ArrayPushMissUseInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName != null && functionName.equals("array_push")) {
@@ -72,7 +72,7 @@ public class ArrayPushMissUseInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpArrayAccessExpression(@NotNull ArrayAccessExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 if (REPORT_EXCESSIVE_COUNT_CALLS) {
                     final PsiElement parent = expression.getParent();

@@ -52,8 +52,8 @@ public class AutoloadingIssuesInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFile(@NotNull PhpFile file) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
-                if (this.isContainingFileSkipped(file, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
+                if (this.shouldSkipAnalysis(file, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String fileName = file.getName();
                 if (fileName.endsWith(".php") && !ignoredFiles.contains(fileName)) {

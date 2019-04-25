@@ -43,7 +43,7 @@ final public class PackedHashtableOptimizationInspector extends BasePhpInspectio
             /* TODO: docs, http://blog.jpauli.tech/2016/04/08/hashtables.html#packed-hashtable-optimization */
 
             public void visitPhpArrayCreationExpression(ArrayCreationExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 /* requires PHP7 */
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();

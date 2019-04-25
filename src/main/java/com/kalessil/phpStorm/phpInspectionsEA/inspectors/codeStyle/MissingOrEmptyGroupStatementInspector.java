@@ -44,43 +44,43 @@ public class MissingOrEmptyGroupStatementInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIf(@NotNull If ifStatement) {
-                if (this.isContainingFileSkipped(ifStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(ifStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(ifStatement);
             }
             @Override
             public void visitPhpElseIf(@NotNull ElseIf elseIfStatement) {
-                if (this.isContainingFileSkipped(elseIfStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(elseIfStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(elseIfStatement);
             }
             @Override
             public void visitPhpElse(@NotNull Else elseStatement) {
-                if (this.isContainingFileSkipped(elseStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(elseStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(elseStatement);
             }
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement foreachStatement) {
-                if (this.isContainingFileSkipped(foreachStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(foreachStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(foreachStatement);
             }
             @Override
             public void visitPhpFor(@NotNull For forStatement) {
-                if (this.isContainingFileSkipped(forStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(forStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(forStatement);
             }
             @Override
             public void visitPhpWhile(@NotNull While whileStatement) {
-                if (this.isContainingFileSkipped(whileStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(whileStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(whileStatement);
             }
             @Override
             public void visitPhpDoWhile(@NotNull DoWhile doWhileStatement) {
-                if (this.isContainingFileSkipped(doWhileStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(doWhileStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(doWhileStatement);
             }

@@ -39,8 +39,8 @@ public class CompositionAndInheritanceInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClass(@NotNull PhpClass clazz) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
-                if (this.isContainingFileSkipped(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
+                if (this.shouldSkipAnalysis(clazz, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final boolean hasNeededModifiers = clazz.isFinal() || clazz.isAbstract();
                 if (!hasNeededModifiers && !clazz.isInterface() && !clazz.isTrait() && !clazz.isAnonymous()) {

@@ -43,7 +43,7 @@ public class NestedNotOperatorsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpUnaryExpression(@NotNull UnaryExpression expression) {
-                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
+                if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 /* process ony not operations */
                 if (!OpenapiTypesUtil.is(expression.getOperation(), PhpTokenTypes.opNOT)) {

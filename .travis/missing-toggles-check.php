@@ -6,6 +6,7 @@
     $missingDistractionTogglesFiles = [];
     $partialDistractionTogglesFiles = [];
     $missingUltimateTogglesFiles    = [];
+    $inconsistentStrictnessToggles  = [];
 
     /* @var \SplFileInfo $file */
     foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($sourcesPath)) as $file) {
@@ -49,9 +50,18 @@
             if ($ultimateToggles > 0 && $visitors != $ultimateToggles) {
                 $missingUltimateTogglesFiles[] = $file->getFilename();
             }
+
+            preg_match_all('/StrictnessCategory\.STRICTNESS_CATEGORY_\w+)/', $content, $strictnessToggles);
+            if (count(array_unique($strictnessToggles[0])) !== 1 || count($strictnessToggles[0]) !== $visitors) {
+                $inconsistentStrictnessToggles[] = $file->getFilename();
+            }
         }
     }
 
+    if (count($inconsistentStrictnessToggles) > 0) {
+        echo 'Following files has inconsistent strictness toggles: ' . PHP_EOL . implode(PHP_EOL, $inconsistentStrictnessToggles) . PHP_EOL;
+        exit(-1);
+    }
     if (count($missingUltimateTogglesFiles) > 0) {
         echo 'Following files has inconsistent ultimate toggles: ' . PHP_EOL . implode(PHP_EOL, $missingUltimateTogglesFiles) . PHP_EOL;
         exit(-1);

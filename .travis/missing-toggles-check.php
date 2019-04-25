@@ -61,9 +61,11 @@
                 if (count(array_unique($strictnessTypes)) !== 1 || count($strictnessTypes) !== $visitors) {
                     $inconsistentStrictnessToggles[] = $file->getFilename();
                 } else {
-                    $xpath = sprintf('//localInspection[contains(@implementationClass, "%s")]', str_replace('.java', '', $file->getFilename()));
-                    $group = str_replace(' ', '', strtoupper($manifestUltimate->xpath($xpath)[0]->attributes()->groupName));
-throw new \RuntimeException($group);
+                    $xpath    = sprintf('//localInspection[contains(@implementationClass, "%s")]', str_replace('.java', '', $file->getFilename()));
+                    $category = str_replace(' ', '_', strtoupper($manifestUltimate->xpath($xpath)[0]->attributes()->groupName));
+                    if ($strictnessTypes[0] !== 'StrictnessCategory.STRICTNESS_CATEGORY_' . $category) {
+                        $inconsistentStrictnessToggles[] = $file->getFilename();
+                    }
                 }
             }
         }

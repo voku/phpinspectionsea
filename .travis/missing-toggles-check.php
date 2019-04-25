@@ -52,7 +52,7 @@
             }
 
             if ($visitors > 0) {
-                preg_match_all('/StrictnessCategory\.STRICTNESS_CATEGORY_\w+)/', $content, $strictnessToggles);
+                preg_match_all('/StrictnessCategory\.STRICTNESS_CATEGORY_\w+/', $content, $strictnessToggles);
                 $strictnessTypes = (array) $strictnessToggles[0];
                 if (count(array_unique($strictnessTypes)) !== 1 || count($strictnessTypes) !== $visitors) {
                     $inconsistentStrictnessToggles[] = $file->getFilename();

@@ -11,6 +11,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.fixers.UseSuggestedReplacementFixe
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiElementsUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import org.jetbrains.annotations.NotNull;
@@ -66,8 +67,8 @@ public class TypesCastingCanBeUsedInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(reference))              { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                     { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName != null && functionsMapping.containsKey(functionName)) {
@@ -114,8 +115,8 @@ public class TypesCastingCanBeUsedInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpStringLiteralExpression(@NotNull StringLiteralExpression literal) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(literal))                { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                   { return; }
+                if (this.isContainingFileSkipped(literal, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 if (REPORT_INLINES && OpenapiTypesUtil.isString(literal) && !literal.isHeredoc()) {
                     final PsiElement[] children = literal.getChildren();
@@ -141,8 +142,8 @@ public class TypesCastingCanBeUsedInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(expression))             { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                      { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 if (OpenapiTypesUtil.is(expression.getOperation(), PhpTokenTypes.opMUL)) {
                     final PsiElement left     = expression.getLeftOperand();
@@ -158,8 +159,8 @@ public class TypesCastingCanBeUsedInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(reference))              { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                     { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 final String methodName = reference.getName();
                 if (methodName != null && methodName.equals("__toString")) {

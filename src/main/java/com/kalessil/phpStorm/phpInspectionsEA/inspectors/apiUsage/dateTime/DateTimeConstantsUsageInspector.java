@@ -11,6 +11,7 @@ import com.jetbrains.php.lang.psi.elements.ConstantReference;
 import com.jetbrains.php.lang.psi.elements.Field;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,7 +48,7 @@ public class DateTimeConstantsUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClassConstantReference(@NotNull ClassConstantReference constantReference) {
-                if (this.isContainingFileSkipped(constantReference)) { return; }
+                if (this.isContainingFileSkipped(constantReference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String constantName = constantReference.getName();
                 if (constantName != null && constantName.equals("ISO8601")) {
@@ -63,7 +64,7 @@ public class DateTimeConstantsUsageInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpConstantReference(@NotNull ConstantReference reference) {
-                if (this.isContainingFileSkipped(reference)) { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String constantName = reference.getName();
                 if (constantName != null && constantName.equals("DATE_ISO8601")) {

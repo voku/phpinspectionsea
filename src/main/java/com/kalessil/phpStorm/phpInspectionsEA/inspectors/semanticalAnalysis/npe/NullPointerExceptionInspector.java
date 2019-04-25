@@ -10,6 +10,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.inspectors.semanticalAnalysis.npe.
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.semanticalAnalysis.npe.strategy.NullableVariablesStrategy;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -33,8 +34,8 @@ public class NullPointerExceptionInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(method))                 { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                       { return; }
+                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 if (!method.isAbstract() && !this.isTestContext(method)) {
                     NullableVariablesStrategy.applyToParameters(method, holder);
@@ -46,8 +47,8 @@ public class NullPointerExceptionInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(function))               { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
+                if (this.isContainingFileSkipped(function, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 NullableVariablesStrategy.applyToParameters(function, holder);
                 NullableVariablesStrategy.applyToLocalVariables(function, holder);

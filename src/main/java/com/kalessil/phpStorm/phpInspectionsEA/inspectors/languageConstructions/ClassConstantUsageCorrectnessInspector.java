@@ -11,6 +11,7 @@ import com.jetbrains.php.lang.psi.PhpFile;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -46,7 +47,7 @@ public class ClassConstantUsageCorrectnessInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpClassConstantReference(@NotNull ClassConstantReference constantReference) {
-                if (this.isContainingFileSkipped(constantReference)) { return; }
+                if (this.isContainingFileSkipped(constantReference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String constantName = constantReference.getName();
                 if (constantName != null && constantName.equals("class")) {

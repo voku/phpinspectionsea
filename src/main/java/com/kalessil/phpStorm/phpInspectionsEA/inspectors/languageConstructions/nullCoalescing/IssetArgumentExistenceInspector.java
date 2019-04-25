@@ -12,6 +12,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.inspectors.ifs.utils.ExpressionCos
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import org.jetbrains.annotations.NotNull;
@@ -53,8 +54,8 @@ public class IssetArgumentExistenceInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(expression))             { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PsiElement argument = expression.getLeftOperand();
                 if (argument != null && PhpTokenTypes.opCOALESCE == expression.getOperationType()) {
@@ -64,16 +65,16 @@ public class IssetArgumentExistenceInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpEmpty(@NotNull PhpEmpty expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(expression))             { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.analyzeArgumentsExistence(expression.getVariables());
             }
 
             @Override
             public void visitPhpIsset(@NotNull PhpIsset expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(expression))             { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                           { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.analyzeArgumentsExistence(expression.getVariables());
             }

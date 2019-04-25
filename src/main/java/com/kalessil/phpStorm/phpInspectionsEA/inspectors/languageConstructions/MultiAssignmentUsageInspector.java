@@ -13,6 +13,7 @@ import com.jetbrains.php.lang.psi.PhpFile;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiEquivalenceUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +35,7 @@ public class MultiAssignmentUsageInspector extends BasePhpInspection {
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, final boolean isOnTheFly) {
         return new BasePhpElementVisitor() {
             public void visitPhpMultiassignmentExpression(MultiassignmentExpression multiassignmentExpression) {
-                if (this.isContainingFileSkipped(multiassignmentExpression)) { return; }
+                if (this.isContainingFileSkipped(multiassignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 /* ensure php version is at least PHP 5.5 */
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();
@@ -88,7 +89,7 @@ public class MultiAssignmentUsageInspector extends BasePhpInspection {
             }
 
             public void visitPhpAssignmentExpression(AssignmentExpression assignmentExpression) {
-                if (this.isContainingFileSkipped(assignmentExpression)) { return; }
+                if (this.isContainingFileSkipped(assignmentExpression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 /* ensure we are writing into a variable */
                 if (!(assignmentExpression.getVariable() instanceof Variable)){

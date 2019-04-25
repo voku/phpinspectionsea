@@ -15,6 +15,7 @@ import com.jetbrains.php.lang.psi.elements.PhpIsset;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiEquivalenceUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import org.jetbrains.annotations.NotNull;
@@ -47,8 +48,8 @@ public class UnnecessaryIssetArgumentsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIsset(@NotNull PhpIsset issetExpression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(issetExpression))        { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
+                if (this.isContainingFileSkipped(issetExpression, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 final PsiElement[] arguments = issetExpression.getVariables();
                 if (arguments.length > 1) {

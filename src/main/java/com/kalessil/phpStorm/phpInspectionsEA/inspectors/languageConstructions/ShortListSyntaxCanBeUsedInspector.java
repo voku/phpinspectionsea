@@ -13,6 +13,7 @@ import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +43,7 @@ public class ShortListSyntaxCanBeUsedInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMultiassignmentExpression(@NotNull MultiassignmentExpression assignment) {
-                if (this.isContainingFileSkipped(assignment)) { return; }
+                if (this.isContainingFileSkipped(assignment, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 /* ensure php version is at least PHP 7.1 */
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();
@@ -60,7 +61,7 @@ public class ShortListSyntaxCanBeUsedInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement foreach) {
-                if (this.isContainingFileSkipped(foreach)) { return; }
+                if (this.isContainingFileSkipped(foreach, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 /* ensure php version is at least PHP 7.1 */
                 final PhpLanguageLevel php = PhpProjectConfigurationFacade.getInstance(holder.getProject()).getLanguageLevel();

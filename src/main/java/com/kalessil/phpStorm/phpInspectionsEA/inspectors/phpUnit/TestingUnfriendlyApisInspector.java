@@ -13,6 +13,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.NamedElementUtil;
 import org.jetbrains.annotations.NotNull;
@@ -56,8 +57,8 @@ public class TestingUnfriendlyApisInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled()) { return; }
-                if (this.isContainingFileSkipped(method))                 { return; }
+                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
+                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final PsiElement nameIdentifier = NamedElementUtil.getNameIdentifier(method);
                 if (nameIdentifier != null && !method.isAbstract() && this.isTestContext(method)) {

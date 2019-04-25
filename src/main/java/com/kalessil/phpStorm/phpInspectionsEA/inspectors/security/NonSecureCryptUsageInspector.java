@@ -20,6 +20,7 @@ import com.jetbrains.php.lang.psi.elements.FunctionReference;
 import com.jetbrains.php.lang.psi.elements.StringLiteralExpression;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.PossibleValuesDiscoveryUtil;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,7 @@ public class NonSecureCryptUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (this.isContainingFileSkipped(reference)) { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName == null || !functionName.equals("crypt")) {

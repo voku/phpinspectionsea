@@ -7,6 +7,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.jetbrains.php.lang.psi.elements.Include;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -33,7 +34,7 @@ public class UntrustedInclusionInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpInclude(@NotNull Include include) {
-                if (this.isContainingFileSkipped(include)) { return; }
+                if (this.isContainingFileSkipped(include, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final PsiElement file = ExpressionSemanticUtil.resolveAsStringLiteral(include.getArgument());
                 if (file != null) {

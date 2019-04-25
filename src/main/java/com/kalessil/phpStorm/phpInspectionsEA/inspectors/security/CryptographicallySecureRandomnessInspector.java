@@ -13,6 +13,7 @@ import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiEquivalenceUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
@@ -48,7 +49,7 @@ public class CryptographicallySecureRandomnessInspector extends BasePhpInspectio
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (this.isContainingFileSkipped(reference)) { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName == null || (!functionName.equals("openssl_random_pseudo_bytes") && !functionName.equals("mcrypt_create_iv"))) {

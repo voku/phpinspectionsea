@@ -13,6 +13,7 @@ import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -47,7 +48,7 @@ public class MkdirRaceConditionInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (this.isContainingFileSkipped(reference)) { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
 
                 final String functionName = reference.getName();
                 if (functionName == null || !functionName.equals("mkdir")) {

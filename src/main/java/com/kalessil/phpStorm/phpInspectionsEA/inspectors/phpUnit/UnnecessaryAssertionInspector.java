@@ -15,6 +15,7 @@ import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiElementsUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.PossibleValuesDiscoveryUtil;
@@ -63,7 +64,7 @@ public class UnnecessaryAssertionInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (this.isContainingFileSkipped(reference)) { return; }
+                if (this.isContainingFileSkipped(, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
 
                 final String methodName = reference.getName();
                 if (methodName != null) {

@@ -7,6 +7,7 @@ import com.jetbrains.php.lang.psi.elements.FunctionReference;
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.security.rsaStrategies.McryptRsaOraclePaddingStrategy;
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.security.rsaStrategies.OpensslRsaOraclePaddingStrategy;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class RsaOraclePaddingAttacksInspector extends LocalInspectionTool {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (this.isContainingFileSkipped(reference)) { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final List<BooleanSupplier> callbacks = new ArrayList<>(2);
                 callbacks.add(() -> OpensslRsaOraclePaddingStrategy.apply(holder, reference));

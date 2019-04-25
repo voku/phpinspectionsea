@@ -21,6 +21,7 @@ import com.kalessil.phpStorm.phpInspectionsEA.inspectors.phpUnit.strategy.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.NamedElementUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
@@ -67,7 +68,7 @@ public class PhpUnitTestsInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (this.isContainingFileSkipped(method)) { return; }
+                if (this.isContainingFileSkipped(method, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
 
                 final PhpClass clazz       = method.getContainingClass();
                 final PsiElement nameNode  = NamedElementUtil.getNameIdentifier(method);
@@ -187,7 +188,7 @@ public class PhpUnitTestsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (this.isContainingFileSkipped(reference)) { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT)) { return; }
 
                 final String methodName = reference.getName();
                 if (methodName != null) {

@@ -6,6 +6,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.jetbrains.php.lang.psi.elements.ConstantReference;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -68,7 +69,7 @@ public class CryptographicallySecureAlgorithmsInspector extends BasePhpInspectio
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpConstantReference(@NotNull ConstantReference reference) {
-                if (this.isContainingFileSkipped(reference)) { return; }
+                if (this.isContainingFileSkipped(reference, StrictnessCategory.STRICTNESS_CATEGORY_SECURITY)) { return; }
 
                 final String constantName = reference.getName();
                 if (constantName != null && constants.containsKey(constantName) && !this.isTestContext(reference)) {

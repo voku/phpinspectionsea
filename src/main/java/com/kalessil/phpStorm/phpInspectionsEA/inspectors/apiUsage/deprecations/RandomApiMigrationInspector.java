@@ -10,9 +10,9 @@ import com.jetbrains.php.config.PhpLanguageFeature;
 import com.jetbrains.php.config.PhpLanguageLevel;
 import com.jetbrains.php.config.PhpProjectConfigurationFacade;
 import com.jetbrains.php.lang.psi.elements.FunctionReference;
+import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
-import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 

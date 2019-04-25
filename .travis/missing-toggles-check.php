@@ -28,7 +28,7 @@
             /* distraction toggles */
             $distractionToggles = 0;
             $lastPosition       = 0;
-            $searchFragment     = '.isContainingFileSkipped';
+            $searchFragment     = '.shouldSkipAnalysis';
             while (($lastPosition = strpos($content, $searchFragment, $lastPosition)) !== false) {
                 ++$distractionToggles;
                 $lastPosition += strlen($searchFragment);

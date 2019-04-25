@@ -13,6 +13,7 @@ import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import com.jetbrains.php.lang.psi.elements.GroupStatement;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 
 /*
@@ -38,7 +39,7 @@ public class ShortOpenTagUsageInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpGroupStatement(@NotNull GroupStatement groupStatement) {
-                if (this.isContainingFileSkipped(groupStatement)) { return; }
+                if (this.isContainingFileSkipped(groupStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement last = groupStatement.getLastChild();
                 if (last instanceof LeafPsiElement) {
@@ -48,7 +49,7 @@ public class ShortOpenTagUsageInspector extends BasePhpInspection {
 
             @Override
             public void visitWhiteSpace(@NotNull PsiWhiteSpace space) {
-                if (this.isContainingFileSkipped(space)) { return; }
+                if (this.isContainingFileSkipped(space, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement previous = space.getPrevSibling();
                 if (previous instanceof LeafPsiElement) {

@@ -11,6 +11,7 @@ import com.jetbrains.php.lang.psi.elements.*;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,43 +44,43 @@ public class MissingOrEmptyGroupStatementInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpIf(@NotNull If ifStatement) {
-                if (this.isContainingFileSkipped(ifStatement)) { return; }
+                if (this.isContainingFileSkipped(ifStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(ifStatement);
             }
             @Override
             public void visitPhpElseIf(@NotNull ElseIf elseIfStatement) {
-                if (this.isContainingFileSkipped(elseIfStatement)) { return; }
+                if (this.isContainingFileSkipped(elseIfStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(elseIfStatement);
             }
             @Override
             public void visitPhpElse(@NotNull Else elseStatement) {
-                if (this.isContainingFileSkipped(elseStatement)) { return; }
+                if (this.isContainingFileSkipped(elseStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(elseStatement);
             }
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement foreachStatement) {
-                if (this.isContainingFileSkipped(foreachStatement)) { return; }
+                if (this.isContainingFileSkipped(foreachStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(foreachStatement);
             }
             @Override
             public void visitPhpFor(@NotNull For forStatement) {
-                if (this.isContainingFileSkipped(forStatement)) { return; }
+                if (this.isContainingFileSkipped(forStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(forStatement);
             }
             @Override
             public void visitPhpWhile(@NotNull While whileStatement) {
-                if (this.isContainingFileSkipped(whileStatement)) { return; }
+                if (this.isContainingFileSkipped(whileStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(whileStatement);
             }
             @Override
             public void visitPhpDoWhile(@NotNull DoWhile doWhileStatement) {
-                if (this.isContainingFileSkipped(doWhileStatement)) { return; }
+                if (this.isContainingFileSkipped(doWhileStatement, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.checkBrackets(doWhileStatement);
             }

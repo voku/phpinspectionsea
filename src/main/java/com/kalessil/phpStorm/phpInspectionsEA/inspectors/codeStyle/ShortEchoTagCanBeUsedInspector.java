@@ -11,6 +11,7 @@ import com.jetbrains.php.lang.psi.elements.PhpEchoStatement;
 import com.jetbrains.php.lang.psi.elements.PhpPrintExpression;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,14 +41,14 @@ public class ShortEchoTagCanBeUsedInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpEchoStatement(@NotNull PhpEchoStatement echo) {
-                if (this.isContainingFileSkipped(echo)) { return; }
+                if (this.isContainingFileSkipped(echo, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 this.analyze(echo, echo);
             }
 
             @Override
             public void visitPhpPrint(@NotNull PhpPrintExpression print) {
-                if (this.isContainingFileSkipped(print)) { return; }
+                if (this.isContainingFileSkipped(print, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement parent = print.getParent();
                 this.analyze(print, OpenapiTypesUtil.isStatementImpl(parent) ? parent : print);

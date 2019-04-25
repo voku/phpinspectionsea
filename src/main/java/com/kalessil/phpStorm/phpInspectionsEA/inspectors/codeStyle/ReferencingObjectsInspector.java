@@ -109,7 +109,7 @@ public class ReferencingObjectsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpNewExpression(@NotNull NewExpression expression) {
-                if (this.isContainingFileSkipped(expression)) { return; }
+                if (this.isContainingFileSkipped(expression, StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE)) { return; }
 
                 final PsiElement parent = expression.getParent();
                 if (parent instanceof AssignmentExpression) {

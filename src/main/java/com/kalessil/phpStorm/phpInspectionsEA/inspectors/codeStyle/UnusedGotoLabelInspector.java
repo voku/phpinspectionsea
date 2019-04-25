@@ -14,6 +14,7 @@ import com.jetbrains.php.lang.psi.elements.PhpGoto;
 import com.jetbrains.php.lang.psi.elements.PhpGotoLabel;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +43,7 @@ public class UnusedGotoLabelInspector extends BasePhpInspection {
         return new BasePhpElementVisitor() {
             @Override
             public void visitPhpGotoLabel(@NotNull PhpGotoLabel label) {
-                if (this.isContainingFileSkipped(label)) { return; }
+                if (this.isContainingFileSkipped(label, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 final Function function   = ExpressionSemanticUtil.getScope(label);
                 final GroupStatement body = null == function ? null : ExpressionSemanticUtil.getGroupStatement(function);

@@ -1,7 +1,11 @@
 <?php
 
-    $basePath    = __DIR__ . '/..';
-    $sourcesPath = $basePath . '/src/main/java/com/kalessil/phpStorm/phpInspectionsEA/inspectors';
+    $basePath         = __DIR__ . '/..';
+    $sourcesPath      = $basePath . '/src/main/java/com/kalessil/phpStorm/phpInspectionsEA/inspectors';
+    $manifestUltimate = simplexml_load_string(file_get_contents($basePath . '/src/main/resources/META-INF/plugin.xml'));
+    if ($manifestUltimate === false) {
+        throw new \RuntimeException('Could not load the manifest');
+    }
 
     $missingDistractionTogglesFiles = [];
     $partialDistractionTogglesFiles = [];
@@ -56,6 +60,10 @@
                 $strictnessTypes = (array) $strictnessToggles[0];
                 if (count(array_unique($strictnessTypes)) !== 1 || count($strictnessTypes) !== $visitors) {
                     $inconsistentStrictnessToggles[] = $file->getFilename();
+                } else {
+                    $xpath = sprintf('//localInspection[contains(@implementationClass, "%s")]', str_replace('.java', '', $file->getFilename()));
+                    $group = str_replace(' ', '', strtoupper($manifestUltimate->xpath($xpath)[0]->attributes()->groupName));
+throw new \RuntimeException($group);
                 }
             }
         }

@@ -44,11 +44,16 @@ public class EAUltimateProjectSettings extends AbstractProjectComponent implemen
             categoryNode.setAttribute("enabled", isCategoryActive ? "yes" : "no");
             categoriesNode.addContent(categoryNode);
         });
-
-        final Element settingsNode                 = new Element("settings");
+        
         final Element analyzeOnlyModifiedFilesNode = new Element("ANALYZE_ONLY_MODIFIED_FILES");
         analyzeOnlyModifiedFilesNode.setAttribute("value", analyzeOnlyModifiedFiles ? "yes" : "no");
+
+        final Element preferYodaComparisonStyleNode = new Element("PREFER_YODA_COMPARISON_STYLE");
+        preferYodaComparisonStyleNode.setAttribute("value", preferYodaComparisonStyle ? "yes" : "no");
+
+        final Element settingsNode = new Element("settings");
         settingsNode.addContent(analyzeOnlyModifiedFilesNode);
+        settingsNode.addContent(preferYodaComparisonStyleNode);
 
         final Element configuration = new Element("any-name-here");
         configuration.addContent(categoriesNode);
@@ -73,6 +78,10 @@ public class EAUltimateProjectSettings extends AbstractProjectComponent implemen
             final Element analyzeOnlyModifiedFilesNode = settingsNode.getChild("ANALYZE_ONLY_MODIFIED_FILES");
             if (analyzeOnlyModifiedFilesNode != null) {
                 analyzeOnlyModifiedFiles = "yes".equals(analyzeOnlyModifiedFilesNode.getAttributeValue("value"));
+            }
+            final Element preferYodaComparisonStyleNode = settingsNode.getChild("PREFER_YODA_COMPARISON_STYLE");
+            if (preferYodaComparisonStyleNode != null) {
+                preferYodaComparisonStyle = "yes".equals(preferYodaComparisonStyleNode.getAttributeValue("value"));
             }
         }
     }

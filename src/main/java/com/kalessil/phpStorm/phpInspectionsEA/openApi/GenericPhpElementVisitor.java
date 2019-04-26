@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
  * file that was distributed with this source code.
  */
 
-public abstract class BasePhpElementVisitor extends PhpElementVisitor {
+public abstract class GenericPhpElementVisitor extends PhpElementVisitor {
     @Override
     final public void visitPhpElement(@NotNull PhpPsiElement element) {
         if (element instanceof PhpDocTag) {

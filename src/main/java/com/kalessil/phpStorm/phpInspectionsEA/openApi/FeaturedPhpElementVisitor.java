@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  * file that was distributed with this source code.
  */
 
-public abstract class FeaturedPhpElementVisitor extends BasePhpElementVisitor {
+public abstract class FeaturedPhpElementVisitor extends GenericPhpElementVisitor {
     @Override
     protected boolean shouldSkipAnalysis(@NotNull PsiElement target, @NotNull StrictnessCategory category) {
         return !EAUltimateApplicationComponent.areFeaturesEnabled() || super.shouldSkipAnalysis(target, category);

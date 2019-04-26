@@ -7,7 +7,7 @@ import com.jetbrains.php.lang.psi.elements.Function;
 import com.jetbrains.php.lang.psi.elements.Method;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.jetbrains.php.lang.psi.visitors.PhpElementVisitor;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +40,7 @@ public class MoreThanThreeArgumentsInspector extends PhpTooManyParametersInspect
         return new ProxyVisitor((PhpElementVisitor) super.buildVisitor(holder, isOnTheFly));
     }
 
-    private static class ProxyVisitor extends BasePhpElementVisitor {
+    private static class ProxyVisitor extends GenericPhpElementVisitor {
         final PhpElementVisitor visitor;
 
         ProxyVisitor(@NotNull PhpElementVisitor visitor) {

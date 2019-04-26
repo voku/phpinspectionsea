@@ -1,7 +1,6 @@
 package com.kalessil.phpStorm.phpInspectionsEA;
 
 import com.intellij.openapi.components.AbstractProjectComponent;
-import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;

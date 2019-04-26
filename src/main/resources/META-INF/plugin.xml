@@ -1035,7 +1035,7 @@
           <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectSettings</implementation-class>
       </component>
       <component>
-          <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.gui.EAUltimateSidebarComponent</implementation-class>
+          <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSidebarComponent</implementation-class>
       </component>
   </project-components>
 

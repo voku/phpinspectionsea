@@ -1,4 +1,4 @@
-package com.kalessil.phpStorm.phpInspectionsEA.gui;
+package com.kalessil.phpStorm.phpInspectionsEA.settings;
 
 import com.intellij.ide.DataManager;
 import com.intellij.openapi.actionSystem.DataContext;
@@ -98,17 +98,17 @@ public final class OptionsComponent {
         }).getComponent(), "pushx, growx");
     }
 
-    void addText(@NotNull String label) {
+    public void addText(@NotNull String label) {
         optionsPanel.add(new JLabel(label), "wrap, growx");
     }
 
-    void addText(@NotNull String label, int fontSize) {
+    public void addText(@NotNull String label, int fontSize) {
         final JLabel component = new JLabel(label);
         component.setFont(new Font(component.getFont().getFamily(), Font.PLAIN, fontSize));
         optionsPanel.add(component, "wrap, growx");
     }
 
-    void addHyperlink(@NotNull String label, @NotNull Consumer<HyperlinkEvent> consumer) {
+    public void addHyperlink(@NotNull String label, @NotNull Consumer<HyperlinkEvent> consumer) {
         final HyperlinkLabel createdHyperlink = new HyperlinkLabel(label);
         createdHyperlink.addHyperlinkListener(consumer::accept);
         optionsPanel.add(createdHyperlink, "wrap");

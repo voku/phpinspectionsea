@@ -1,4 +1,4 @@
-package com.kalessil.phpStorm.phpInspectionsEA.gui;
+package com.kalessil.phpStorm.phpInspectionsEA;
 
 import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.options.ShowSettingsUtil;
@@ -6,9 +6,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectSettings;
 import com.kalessil.phpStorm.phpInspectionsEA.license.LicenseService;
+import com.kalessil.phpStorm.phpInspectionsEA.settings.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 

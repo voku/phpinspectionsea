@@ -123,6 +123,7 @@ public class EAUltimateApplicationComponent implements ApplicationComponent {
                 public void append(@NotNull LoggingEvent event) {
                     final ThrowableInformation exceptionDetails = event.getThrowableInformation();
                     if (exceptionDetails != null) {
+
                         AnalyticsUtil.registerLoggedException(
                             settings.getVersion(),
                             settings.getUuid(),

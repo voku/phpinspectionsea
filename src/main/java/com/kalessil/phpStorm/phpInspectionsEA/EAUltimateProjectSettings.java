@@ -26,7 +26,6 @@ import java.util.Map;
 @State(name = "EAUltimateProjectSettings", storages = @Storage("$PROJECT_CONFIG_DIR$/php-inspections-ea-ultimate.xml"))
 public class EAUltimateProjectSettings extends AbstractProjectComponent implements PersistentStateComponent<Element> {
     private boolean analyzeOnlyModifiedFiles            = false;
-    private boolean reportCrashReports                  = true;
     private Map<StrictnessCategory, Boolean> categories = new LinkedHashMap<>();
 
     protected EAUltimateProjectSettings(@NotNull Project project) {
@@ -91,13 +90,5 @@ public class EAUltimateProjectSettings extends AbstractProjectComponent implemen
 
     public void setAnalyzingOnlyModifiedFiles(boolean value) {
         analyzeOnlyModifiedFiles = value;
-    }
-
-    public boolean isReportingCrashReports() {
-        return reportCrashReports;
-    }
-
-    public void setReportingCrashReports(boolean value) {
-        reportCrashReports = value;
     }
 }

@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  * file that was distributed with this source code.
  */
 
-public class EAUltimateUpdateComponent implements ProjectComponent {
+public class EAUltimateReleaseNotesAnnouncerComponent implements ProjectComponent {
     private EAUltimateApplicationComponent applicationComponent;
 
     @Override
@@ -34,7 +34,7 @@ public class EAUltimateUpdateComponent implements ProjectComponent {
     @NotNull
     @Override
     public String getComponentName() {
-        return "EAUltimateUpdateComponent";
+        return "EAUltimateReleaseNotesAnnouncerComponent";
     }
 
     @Override

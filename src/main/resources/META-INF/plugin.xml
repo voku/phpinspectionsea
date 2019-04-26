@@ -1026,7 +1026,7 @@
 
   <project-components>
       <component>
-          <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateUpdateComponent</implementation-class>
+          <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateReleaseNotesAnnouncerComponent</implementation-class>
       </component>
       <component>
           <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateChangesTrackerComponent</implementation-class>

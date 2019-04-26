@@ -6,10 +6,10 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.tree.IElementType;
 import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.elements.*;
+import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectSettings;
 import com.kalessil.phpStorm.phpInspectionsEA.fixers.UseSuggestedReplacementFixer;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
-import com.kalessil.phpStorm.phpInspectionsEA.settings.ComparisonStyle;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiElementsUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
@@ -112,9 +112,9 @@ public class InArrayMissUseInspector extends BasePhpInspection {
 
                         final boolean isStrict   = arguments.length == 3 && PhpLanguageUtil.isTrue(arguments[2]);
                         final String  comparison = (checkExists ? "==" : "!=") + (isStrict ? "=" : "");
-                        final String replacement = ComparisonStyle.isRegular()
-                                                   ? String.format("%s %s %s", arguments[0].getText(), comparison, lastItem.getText())
-                                                   : String.format("%s %s %s", lastItem.getText(), comparison, arguments[0].getText());
+                        final String replacement = holder.getProject().getComponent(EAUltimateProjectSettings.class).isPreferringYodaComparisonStyle()
+                                                   ? String.format("%s %s %s", lastItem.getText(), comparison, arguments[0].getText())
+                                                   : String.format("%s %s %s", arguments[0].getText(), comparison, lastItem.getText());
                         final String message = String.format(patternComparison, replacement);
                         holder.registerProblem(target, message, new UseComparisonFix(replacement));
                     }

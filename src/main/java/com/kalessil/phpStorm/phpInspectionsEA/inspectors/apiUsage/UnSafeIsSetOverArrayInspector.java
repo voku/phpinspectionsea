@@ -9,11 +9,11 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
+import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectSettings;
 import com.kalessil.phpStorm.phpInspectionsEA.fixers.UseSuggestedReplacementFixer;
 import com.kalessil.phpStorm.phpInspectionsEA.gui.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
-import com.kalessil.phpStorm.phpInspectionsEA.settings.ComparisonStyle;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.*;
 import org.apache.commons.lang.StringUtils;
@@ -113,7 +113,7 @@ public class UnSafeIsSetOverArrayInspector extends BasePhpInspection {
                         /* false-positives: finally, perhaps fallback to initialization in try */
                         if (PsiTreeUtil.getParentOfType(issetExpression, Finally.class) == null) {
                             final List<String> fragments = Arrays.asList(argument.getText(), issetInverted ? "===" : "!==", "null");
-                            if (!ComparisonStyle.isRegular()) {
+                            if (holder.getProject().getComponent(EAUltimateProjectSettings.class).isPreferringYodaComparisonStyle()) {
                                 Collections.reverse(fragments);
                             }
                             final String replacement = String.join(" ", fragments);

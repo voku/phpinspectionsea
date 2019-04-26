@@ -2,7 +2,6 @@ package com.kalessil.phpStorm.phpInspectionsEA.api;
 
 import com.kalessil.phpStorm.phpInspectionsEA.PhpCodeInsightFixtureTestCase;
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.apiUsage.IsNullFunctionUsageInspector;
-import com.kalessil.phpStorm.phpInspectionsEA.settings.ComparisonStyle;
 
 final public class IsNullFunctionUsageInspectorTest extends PhpCodeInsightFixtureTestCase {
     public void testIfFindsAllPatternsAndWithInYodaStyle() {

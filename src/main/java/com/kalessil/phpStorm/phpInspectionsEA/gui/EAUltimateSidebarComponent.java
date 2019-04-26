@@ -45,7 +45,7 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
     private JPanel buildPanel() {
         return OptionsComponent.create(component -> {
             final EAUltimateProjectSettings s = myProject.getComponent(EAUltimateProjectSettings.class);
-            component.addPanel("License information",         panel -> {
+            component.addPanel("License information",                           panel -> {
                 String message               = "Licensing information is not available";
                 final LicenseService service = EAUltimateApplicationComponent.getLicenseService();
                 if (service != null && service.shouldCheckPluginLicense()) {
@@ -62,14 +62,11 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                 panel.addText("", 12);
                 panel.addText(message + ", as of IDE start.");
             });
-            component.addPanel("Settings management",         panel -> {
+            component.addPanel("Settings management",                            panel -> {
                 panel.addText("", 12);
-                panel.addHyperlink(
-                        "File / Settings / Editor / Inspections",
-                        (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, "Inspections")
-                );
-                panel.addCheckbox("Analyze only modified files", s.isAnalyzingOnlyModifiedFiles(), s::setAnalyzingOnlyModifiedFiles);
-
+                panel.addHyperlink("File / Settings / Editor / Inspections", (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, "Inspections"));
+                panel.addCheckbox("Prefer Yoda comparison style",            s.isPreferringYodaComparisonStyle(), s::setPreferringYodaComparisonStyle);
+                panel.addCheckbox("Analyze only modified files",             s.isAnalyzingOnlyModifiedFiles(),    s::setAnalyzingOnlyModifiedFiles);
             });
             component.addPanel("Strictness categories * (loosest to strictest)", panel -> {
                 panel.addText("", 12);

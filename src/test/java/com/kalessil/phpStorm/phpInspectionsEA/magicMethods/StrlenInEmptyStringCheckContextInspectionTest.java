@@ -2,7 +2,6 @@ package com.kalessil.phpStorm.phpInspectionsEA.magicMethods;
 
 import com.kalessil.phpStorm.phpInspectionsEA.PhpCodeInsightFixtureTestCase;
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.semanticalTransformations.StrlenInEmptyStringCheckContextInspection;
-import com.kalessil.phpStorm.phpInspectionsEA.settings.ComparisonStyle;
 
 final public class StrlenInEmptyStringCheckContextInspectionTest extends PhpCodeInsightFixtureTestCase {
     public void testIfFindsAllPatterns() {

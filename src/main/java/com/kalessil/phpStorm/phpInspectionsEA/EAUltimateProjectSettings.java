@@ -25,6 +25,7 @@ import java.util.Map;
 
 @State(name = "EAUltimateProjectSettings", storages = @Storage("$PROJECT_CONFIG_DIR$/php-inspections-ea-ultimate.xml"))
 public class EAUltimateProjectSettings extends AbstractProjectComponent implements PersistentStateComponent<Element> {
+    private boolean preferYodaComparisonStyle           = false;
     private boolean analyzeOnlyModifiedFiles            = false;
     private Map<StrictnessCategory, Boolean> categories = new LinkedHashMap<>();
 
@@ -90,5 +91,13 @@ public class EAUltimateProjectSettings extends AbstractProjectComponent implemen
 
     public void setAnalyzingOnlyModifiedFiles(boolean value) {
         analyzeOnlyModifiedFiles = value;
+    }
+
+    public boolean isPreferringYodaComparisonStyle() {
+        return preferYodaComparisonStyle;
+    }
+
+    public void setPreferringYodaComparisonStyle(boolean value) {
+        preferYodaComparisonStyle = value;
     }
 }

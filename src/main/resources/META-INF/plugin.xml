@@ -1016,7 +1016,6 @@
 
     <applicationService      serviceInterface="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationSettings"
                              serviceImplementation="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationSettings"   />
-    <applicationConfigurable instance="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationConfiguration"/>
   </extensions>
 
   <application-components>

@@ -98,8 +98,14 @@ public final class OptionsComponent {
         }).getComponent(), "pushx, growx");
     }
 
-    void addText(@NotNull final String label) {
+    void addText(@NotNull String label) {
         optionsPanel.add(new JLabel(label), "wrap, growx");
+    }
+
+    void addText(@NotNull String label, int fontSize) {
+        final JLabel component = new JLabel(label);
+        component.setFont(new Font(component.getFont().getFamily(), Font.PLAIN, fontSize));
+        optionsPanel.add(component, "wrap, growx");
     }
 
     void addHyperlink(@NotNull String label, @NotNull Consumer<HyperlinkEvent> consumer) {

@@ -87,8 +87,8 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                 panel.addCheckbox("Prio 7: Code style",               s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE),               (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE, is));
                 panel.addCheckbox("Prio 8: Unused",                   s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_UNUSED),                   (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_UNUSED, is));
 
-                panel.addText("");
-                panel.addText("* inspections from the un-checked groups are not running");
+                panel.addText("", 12);
+                panel.addText("* inspections from the unchecked groups are skipped", 12);
             });
         });
     }

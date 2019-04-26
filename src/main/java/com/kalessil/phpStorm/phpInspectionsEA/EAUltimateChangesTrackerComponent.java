@@ -16,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 /*
  * This file is part of the Php Inspections (EA Extended) package.
@@ -57,7 +56,10 @@ public class EAUltimateChangesTrackerComponent extends AbstractProjectComponent 
             public void changeListUpdateDone() {
                 /* catch up on reverts */
                 files.stream()
-                        .filter(file -> changeListManager.getStatus(file) != FileStatus.MODIFIED)
+                        .filter(file -> {
+                            final FileStatus status = changeListManager.getStatus(file);
+                            return status != FileStatus.MODIFIED && status != FileStatus.ADDED;
+                        })
                         .forEach(files::remove);
                 /* catch up on branch change */
                 changeListManager.getAffectedFiles().stream()

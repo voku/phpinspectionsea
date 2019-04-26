@@ -17,8 +17,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-public class EAUltimateChangesTrackerComponent extends AbstractProjectComponent {
+/*
+ * This file is part of the Php Inspections (EA Extended) package.
+ *
+ * (c) Vladimir Reznichenko <kalessil@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+public class EAUltimateChangesTrackerComponent extends AbstractProjectComponent {
     private final Set<VirtualFile> files;
     private final DocumentListener documentListener;
     private final ChangeListListener changeListListener;

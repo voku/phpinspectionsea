@@ -11,7 +11,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-@State(name = "EAUltimateApplicationSettings", storages = @Storage("$APP_CONFIG$/php_inspections_ea_ultimate.xml"))
+/*
+ * This file is part of the Php Inspections (EA Extended) package.
+ *
+ * (c) Vladimir Reznichenko <kalessil@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+@State(name = "EAUltimateApplicationSettings", storages = @Storage("$APP_CONFIG$/php-inspections-ea-ultimate.xml"))
 public class EAUltimateApplicationSettings implements PersistentStateComponent<Element> {
     private ComparisonStyle comparisonStyle;
 

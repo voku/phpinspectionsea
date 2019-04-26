@@ -14,6 +14,7 @@ import com.intellij.openapi.vcs.changes.ChangeListManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -39,7 +40,7 @@ public class EAUltimateChangesTrackerComponent extends AbstractProjectComponent 
 
         this.documentManager   = FileDocumentManager.getInstance();
         this.changeListManager = ChangeListManager.getInstance(project);
-        this.files             = new CopyOnWriteArraySet<>();
+        this.files             = new HashSet<>();
 
         EditorFactory.getInstance().getEventMulticaster().addDocumentListener(this.documentListener = new DocumentAdapter() {
             @Override
@@ -56,10 +57,15 @@ public class EAUltimateChangesTrackerComponent extends AbstractProjectComponent 
             public void changeListUpdateDone() {
                 /* catch up on reverts */
                 files.stream()
-                        .filter(file -> changeListManager.getStatus(file) == FileStatus.NOT_CHANGED)
+                        .filter(file -> changeListManager.getStatus(file) != FileStatus.MODIFIED)
                         .forEach(files::remove);
                 /* catch up on branch change */
-                files.addAll(changeListManager.getAffectedFiles());
+                changeListManager.getAffectedFiles().stream()
+                        .filter(file -> {
+                            final FileStatus status = changeListManager.getStatus(file);
+                            return status == FileStatus.MODIFIED || status == FileStatus.ADDED;
+                        })
+                        .forEach(files::add);
             }
         });
     }

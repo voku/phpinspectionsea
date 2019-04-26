@@ -65,8 +65,8 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
             component.addPanel("Settings management",                            panel -> {
                 panel.addText("", 12);
                 panel.addHyperlink("File / Settings / Editor / Inspections", (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, "Inspections"));
-                panel.addCheckbox("Prefer Yoda comparison style",            s.isPreferringYodaComparisonStyle(), (is) -> { s.setPreferringYodaComparisonStyle(is); EditorFactory.getInstance().refreshAllEditors(); });
-                panel.addCheckbox("Analyze only modified files",             s.isAnalyzingOnlyModifiedFiles(),    (is) -> { s.setAnalyzingOnlyModifiedFiles(is);    EditorFactory.getInstance().refreshAllEditors(); });
+                panel.addCheckbox("Prefer Yoda comparison style",            s.isPreferringYodaComparisonStyle(), s::setPreferringYodaComparisonStyle);
+                panel.addCheckbox("Analyze only modified files",             s.isAnalyzingOnlyModifiedFiles(),    s::setAnalyzingOnlyModifiedFiles);
             });
             component.addPanel("Strictness categories * (loosest to strictest)", panel -> {
                 panel.addText("", 12);

@@ -139,7 +139,7 @@ public abstract class BasePhpElementVisitor extends PhpElementVisitor {
             if (!settings.isCategoryActive(category)) {
                 return true;
             }
-            /* skip un-changed files is we analyz only modified once */
+            /* skip un-changed files is we analyze only modified once */
             if (settings.isAnalyzingOnlyModifiedFiles()) {
                 final EAUltimateChangesTrackerComponent tracker = project.getComponent(EAUltimateChangesTrackerComponent.class);
                 return tracker != null && tracker.isChanged(file.getVirtualFile());

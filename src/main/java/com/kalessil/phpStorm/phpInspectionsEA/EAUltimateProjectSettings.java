@@ -69,7 +69,7 @@ public class EAUltimateProjectSettings extends AbstractProjectComponent implemen
         if (settingsNode != null) {
             final Element analyzeOnlyModifiedFilesNode = settingsNode.getChild("ANALYZE_ONLY_MODIFIED_FILES");
             if (analyzeOnlyModifiedFilesNode != null) {
-                analyzeOnlyModifiedFiles = "yes".equals(analyzeOnlyModifiedFilesNode.getAttributeValue("enabled"));
+                analyzeOnlyModifiedFiles = "yes".equals(analyzeOnlyModifiedFilesNode.getAttributeValue("value"));
             }
         }
     }

@@ -8,8 +8,8 @@ import com.jetbrains.php.config.PhpProjectConfigurationFacade;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.util.PhpStringUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.fixers.UseSuggestedReplacementFixer;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 

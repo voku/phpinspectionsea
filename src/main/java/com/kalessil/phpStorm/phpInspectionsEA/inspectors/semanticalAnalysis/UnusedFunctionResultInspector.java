@@ -8,9 +8,8 @@ import com.jetbrains.php.lang.psi.elements.FunctionReference;
 import com.jetbrains.php.lang.psi.elements.MethodReference;
 import com.jetbrains.php.lang.psi.elements.PhpTypedElement;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.NamedElementUtil;
@@ -77,10 +76,9 @@ public class UnusedFunctionResultInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String methodName = reference.getName();
@@ -91,7 +89,6 @@ public class UnusedFunctionResultInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String functionName = reference.getName();

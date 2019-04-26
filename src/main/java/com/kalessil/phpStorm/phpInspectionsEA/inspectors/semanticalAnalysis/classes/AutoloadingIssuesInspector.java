@@ -6,9 +6,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.jetbrains.php.lang.psi.PhpFile;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.NamedElementUtil;
 import org.jetbrains.annotations.NotNull;
@@ -49,10 +48,9 @@ public class AutoloadingIssuesInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpFile(@NotNull PhpFile file) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
                 if (this.shouldSkipAnalysis(file, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final String fileName = file.getName();

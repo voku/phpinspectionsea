@@ -16,9 +16,8 @@ import com.jetbrains.php.lang.documentation.phpdoc.psi.tags.PhpDocTag;
 import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.PhpPsiElementFactory;
 import com.jetbrains.php.lang.psi.elements.*;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
@@ -58,7 +57,7 @@ public class OneTimeUseVariablesInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
 
             private void checkOneTimeUse(
                     @NotNull PhpPsiElement construct,
@@ -185,7 +184,6 @@ public class OneTimeUseVariablesInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpReturn(@NotNull PhpReturn expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 /* if function returning reference, do not inspect returns */
@@ -216,7 +214,6 @@ public class OneTimeUseVariablesInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMultiassignmentExpression(@NotNull MultiassignmentExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement parent = expression.getParent();
@@ -239,7 +236,6 @@ public class OneTimeUseVariablesInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 if (OpenapiTypesUtil.isAssignment(expression)) {
@@ -289,7 +285,6 @@ public class OneTimeUseVariablesInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpThrow(@NotNull PhpThrow expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement argument = ExpressionSemanticUtil.getExpressionTroughParenthesis(expression.getArgument());
@@ -303,7 +298,6 @@ public class OneTimeUseVariablesInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpEchoStatement(@NotNull PhpEchoStatement expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement[] arguments = expression.getArguments();
@@ -320,7 +314,6 @@ public class OneTimeUseVariablesInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement source = expression.getArray();

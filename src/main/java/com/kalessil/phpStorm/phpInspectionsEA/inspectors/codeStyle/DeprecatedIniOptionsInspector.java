@@ -8,8 +8,8 @@ import com.jetbrains.php.config.PhpLanguageLevel;
 import com.jetbrains.php.config.PhpProjectConfigurationFacade;
 import com.jetbrains.php.lang.psi.elements.FunctionReference;
 import com.jetbrains.php.lang.psi.elements.StringLiteralExpression;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
 

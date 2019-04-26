@@ -5,9 +5,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.psi.elements.*;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiEquivalenceUtil;
@@ -36,10 +35,9 @@ public class BadExceptionsProcessingInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpTry(@NotNull Try tryStatement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                       { return; }
                 if (this.shouldSkipAnalysis(tryStatement, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final GroupStatement body = ExpressionSemanticUtil.getGroupStatement(tryStatement);
@@ -56,7 +54,6 @@ public class BadExceptionsProcessingInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpCatch(@NotNull Catch catchStatement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                         { return; }
                 if (this.shouldSkipAnalysis(catchStatement, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final Variable variable = catchStatement.getException();

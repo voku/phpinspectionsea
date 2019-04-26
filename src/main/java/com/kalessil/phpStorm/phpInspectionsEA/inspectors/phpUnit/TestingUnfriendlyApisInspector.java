@@ -9,9 +9,8 @@ import com.jetbrains.php.lang.psi.elements.ArrayCreationExpression;
 import com.jetbrains.php.lang.psi.elements.Method;
 import com.jetbrains.php.lang.psi.elements.MethodReference;
 import com.jetbrains.php.lang.psi.elements.NewExpression;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
@@ -54,10 +53,9 @@ public class TestingUnfriendlyApisInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                 { return; }
                 if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE)) { return; }
 
                 final PsiElement nameIdentifier = NamedElementUtil.getNameIdentifier(method);

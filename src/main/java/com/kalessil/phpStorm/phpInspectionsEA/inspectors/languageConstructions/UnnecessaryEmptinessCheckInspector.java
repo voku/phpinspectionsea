@@ -10,9 +10,8 @@ import com.jetbrains.php.config.PhpLanguageLevel;
 import com.jetbrains.php.config.PhpProjectConfigurationFacade;
 import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.elements.*;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
@@ -74,10 +73,9 @@ public class UnnecessaryEmptinessCheckInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpIsset(@NotNull PhpIsset isset) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                { return; }
                 if (this.shouldSkipAnalysis(isset, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 if (SUGGEST_SIMPLIFICATIONS) {
@@ -114,7 +112,6 @@ public class UnnecessaryEmptinessCheckInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final IElementType operator = expression.getOperationType();

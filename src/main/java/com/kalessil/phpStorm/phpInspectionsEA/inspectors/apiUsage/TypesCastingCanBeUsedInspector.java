@@ -6,10 +6,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.elements.*;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.fixers.UseSuggestedReplacementFixer;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiElementsUtil;
@@ -64,10 +63,9 @@ public class TypesCastingCanBeUsedInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                { return; }
                 if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 final String functionName = reference.getName();
@@ -115,7 +113,6 @@ public class TypesCastingCanBeUsedInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpStringLiteralExpression(@NotNull StringLiteralExpression literal) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                              { return; }
                 if (this.shouldSkipAnalysis(literal, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 if (REPORT_INLINES && OpenapiTypesUtil.isString(literal) && !literal.isHeredoc()) {
@@ -142,7 +139,6 @@ public class TypesCastingCanBeUsedInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                 { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 if (OpenapiTypesUtil.is(expression.getOperation(), PhpTokenTypes.opMUL)) {
@@ -159,7 +155,6 @@ public class TypesCastingCanBeUsedInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                                { return; }
                 if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION)) { return; }
 
                 final String methodName = reference.getName();

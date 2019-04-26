@@ -7,10 +7,9 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.elements.*;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.ifs.utils.ExpressionCostEstimateUtil;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
@@ -51,10 +50,9 @@ public class IssetArgumentExistenceInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 final PsiElement argument = expression.getLeftOperand();
@@ -65,7 +63,6 @@ public class IssetArgumentExistenceInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpEmpty(@NotNull PhpEmpty expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.analyzeArgumentsExistence(expression.getVariables());
@@ -73,7 +70,6 @@ public class IssetArgumentExistenceInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpIsset(@NotNull PhpIsset expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                      { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.analyzeArgumentsExistence(expression.getVariables());

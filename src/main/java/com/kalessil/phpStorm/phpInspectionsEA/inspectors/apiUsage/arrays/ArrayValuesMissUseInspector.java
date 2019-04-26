@@ -6,10 +6,9 @@ import com.intellij.psi.PsiElementVisitor;
 import com.jetbrains.php.lang.psi.elements.ForeachStatement;
 import com.jetbrains.php.lang.psi.elements.FunctionReference;
 import com.jetbrains.php.lang.psi.elements.ParameterList;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.fixers.UseSuggestedReplacementFixer;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.PhpLanguageUtil;
@@ -37,10 +36,9 @@ public class ArrayValuesMissUseInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpFunctionCall(@NotNull FunctionReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                   { return; }
                 if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final String functionName = reference.getName();

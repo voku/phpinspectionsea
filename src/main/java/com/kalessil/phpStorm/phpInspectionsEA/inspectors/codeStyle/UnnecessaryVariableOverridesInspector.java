@@ -10,9 +10,8 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.SmartPointerManager;
 import com.intellij.psi.SmartPsiElementPointer;
 import com.jetbrains.php.lang.psi.elements.*;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiTypesUtil;
@@ -38,10 +37,9 @@ public class UnnecessaryVariableOverridesInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignment) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(assignment, StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW)) { return; }
 
                 final PsiElement parent = assignment.getParent();

@@ -15,10 +15,9 @@ import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.parser.PhpElementTypes;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.resolve.types.PhpType;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.inspectors.ifs.utils.ExpressionCostEstimateUtil;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.OptionsComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
@@ -56,10 +55,9 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpMethod(@NotNull Method method) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                           { return; }
                 if (this.shouldSkipAnalysis(method, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 if (!method.isAbstract()) {
@@ -69,7 +67,6 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFunction(@NotNull Function function) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                             { return; }
                 if (this.shouldSkipAnalysis(function, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 this.analyzeFunction(function);
@@ -99,7 +96,6 @@ public class OnlyWritesOnParameterInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpAssignmentExpression(@NotNull AssignmentExpression assignment) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                               { return; }
                 if (this.shouldSkipAnalysis(assignment, StrictnessCategory.STRICTNESS_CATEGORY_UNUSED)) { return; }
 
                 /* because this hook fired e.g. for `.=` assignments (a BC break by PhpStorm) */

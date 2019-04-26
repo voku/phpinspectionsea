@@ -9,9 +9,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.PhpFile;
 import com.jetbrains.php.lang.psi.elements.*;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.*;
 import org.jetbrains.annotations.NotNull;
@@ -59,10 +58,9 @@ public class SuspiciousLoopInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpForeach(@NotNull ForeachStatement statement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(statement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.inspectVariables(statement);
@@ -72,7 +70,6 @@ public class SuspiciousLoopInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpFor(@NotNull For statement) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                     { return; }
                 if (this.shouldSkipAnalysis(statement, StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS)) { return; }
 
                 this.inspectConditions(statement);

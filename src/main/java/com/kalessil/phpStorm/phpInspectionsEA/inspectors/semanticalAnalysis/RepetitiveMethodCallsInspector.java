@@ -7,9 +7,8 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.jetbrains.php.lang.lexer.PhpTokenTypes;
 import com.jetbrains.php.lang.psi.elements.*;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.openApi.GenericPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.openApi.BasePhpInspection;
+import com.kalessil.phpStorm.phpInspectionsEA.openApi.FeaturedPhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.ExpressionSemanticUtil;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiEquivalenceUtil;
@@ -43,10 +42,9 @@ public class RepetitiveMethodCallsInspector extends BasePhpInspection {
     @Override
     @NotNull
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new GenericPhpElementVisitor() {
+        return new FeaturedPhpElementVisitor() {
             @Override
             public void visitPhpBinaryExpression(@NotNull BinaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final IElementType operation = expression.getOperationType();
@@ -90,7 +88,6 @@ public class RepetitiveMethodCallsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpArrayCreationExpression(@NotNull ArrayCreationExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 /* extract base method references */
@@ -125,7 +122,6 @@ public class RepetitiveMethodCallsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpTernaryExpression(@NotNull TernaryExpression expression) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                    { return; }
                 if (this.shouldSkipAnalysis(expression, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 if (!expression.isShort()) {
@@ -154,7 +150,6 @@ public class RepetitiveMethodCallsInspector extends BasePhpInspection {
 
             @Override
             public void visitPhpMethodReference(@NotNull MethodReference reference) {
-                if (!EAUltimateApplicationComponent.areFeaturesEnabled())                                   { return; }
                 if (this.shouldSkipAnalysis(reference, StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE)) { return; }
 
                 final PsiElement currentBase = reference.getFirstChild();

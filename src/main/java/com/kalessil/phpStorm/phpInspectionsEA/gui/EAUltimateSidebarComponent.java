@@ -45,6 +45,7 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
     @NotNull
     private JPanel buildPanel() {
         return OptionsComponent.create(component -> {
+            final EAUltimateProjectConfiguration s = myProject.getComponent(EAUltimateProjectConfiguration.class);
             component.addPanel("License information",         panel -> {
                 String message               = "Licensing information is not available";
                 final LicenseService service = EAUltimateApplicationComponent.getLicenseService();
@@ -53,17 +54,17 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                         if (service.isActivatedLicense()) {
                             message = "Activated (running all features)";
                         } else if (service.isTrialLicense()) {
-                            message = service.isActiveTrialLicense()
-                                    ? "Active trial (running all features)."
-                                    : "Expired trial (partially suspended features)";
+                            message = service.isActiveTrialLicense() ? "Active trial (running all features)." : "Expired trial (partially suspended features)";
                         } else {
                             message = "Not activated (partially suspended features)";
                         }
                     } catch (final Exception failure) { /* do nothing */ }
                 }
+                panel.addText("", 12);
                 panel.addText(message + ", as of IDE start.");
             });
             component.addPanel("Settings management",         panel -> {
+                panel.addText("", 12);
                 panel.addHyperlink(
                         "File / Settings / Php Inspections (EA Ultimate)",
                         (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, EAUltimateApplicationConfiguration.class)
@@ -72,9 +73,11 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                         "File / Settings / Editor / Inspections",
                         (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, "Inspections")
                 );
+                panel.addCheckbox("Analyze only modified files", s.isAnalyzingOnlyModifiedFiles(), s::setAnalyzingOnlyModifiedFiles);
+
             });
             component.addPanel("Strictness categories * (loosest to strictest)", panel -> {
-                final EAUltimateProjectConfiguration s = myProject.getComponent(EAUltimateProjectConfiguration.class);
+                panel.addText("", 12);
                 panel.addCheckbox("Prio 1: Security",                 s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_SECURITY),                 (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_SECURITY, is));
                 panel.addCheckbox("Prio 2: Probable bugs",            s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS),            (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS, is));
                 panel.addCheckbox("Prio 3: Performance",              s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE),              (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE, is));
@@ -86,7 +89,6 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                 panel.addCheckbox("Prio 6: Language level migration", s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION), (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION, is));
                 panel.addCheckbox("Prio 7: Code style",               s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE),               (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE, is));
                 panel.addCheckbox("Prio 8: Unused",                   s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_UNUSED),                   (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_UNUSED, is));
-
                 panel.addText("", 12);
                 panel.addText("* inspections from the unchecked groups are skipped", 12);
             });

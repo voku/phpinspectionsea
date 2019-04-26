@@ -16,7 +16,6 @@ public class EAUltimateSettings implements PersistentStateComponent<Element> {
     private ComparisonStyle comparisonStyle;
 
     private String sendCrashReports;
-    private String checkOnlyChangedFiles;
 
     private String versionOldest;
     private String version;
@@ -48,9 +47,6 @@ public class EAUltimateSettings implements PersistentStateComponent<Element> {
         if (this.sendCrashReports != null) {
             element.setAttribute("sendCrashReports", this.sendCrashReports);
         }
-        if (this.checkOnlyChangedFiles != null) {
-            element.setAttribute("checkOnlyChangedFiles", this.checkOnlyChangedFiles);
-        }
         if (this.comparisonStyle != null) {
             element.setAttribute("comparisonStyle", this.comparisonStyle.getValue());
         }
@@ -75,10 +71,6 @@ public class EAUltimateSettings implements PersistentStateComponent<Element> {
         /* crashes collection */
         final String sendCrashReportsValue = element.getAttributeValue("sendCrashReports");
         this.sendCrashReports              = sendCrashReportsValue == null ? "true" : sendCrashReportsValue;
-
-        /* crashes collection */
-        final String checkOnlyChangedFilesValue = element.getAttributeValue("checkOnlyChangedFiles");
-        this.checkOnlyChangedFiles              = checkOnlyChangedFilesValue == null ? "false" : checkOnlyChangedFilesValue;
 
         /* comparison style */
         final String comparisonStyleValue = element.getAttributeValue("comparisonStyle");
@@ -106,14 +98,6 @@ public class EAUltimateSettings implements PersistentStateComponent<Element> {
 
     public void setSendCrashReports(boolean value) {
         this.sendCrashReports = (value ? "true" : "false");
-    }
-
-    public boolean getCheckOnlyChangedFiles() {
-        return this.checkOnlyChangedFiles != null && this.checkOnlyChangedFiles.equals("true");
-    }
-
-    public void setCheckOnlyChangedFiles(boolean value) {
-        this.checkOnlyChangedFiles = (value ? "true" : "false");
     }
 
     public void setComparisonStyle(final ComparisonStyle comparisonStyleValue) {

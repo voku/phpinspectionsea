@@ -7,7 +7,7 @@ import com.intellij.openapi.wm.ToolWindowAnchor;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationComponent;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationConfiguration;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectConfiguration;
+import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectSettings;
 import com.kalessil.phpStorm.phpInspectionsEA.license.LicenseService;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
@@ -45,7 +45,7 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
     @NotNull
     private JPanel buildPanel() {
         return OptionsComponent.create(component -> {
-            final EAUltimateProjectConfiguration s = myProject.getComponent(EAUltimateProjectConfiguration.class);
+            final EAUltimateProjectSettings s = myProject.getComponent(EAUltimateProjectSettings.class);
             component.addPanel("License information",         panel -> {
                 String message               = "Licensing information is not available";
                 final LicenseService service = EAUltimateApplicationComponent.getLicenseService();

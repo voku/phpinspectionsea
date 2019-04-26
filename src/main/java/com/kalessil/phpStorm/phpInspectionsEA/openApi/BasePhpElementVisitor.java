@@ -9,8 +9,7 @@ import com.jetbrains.php.lang.psi.PhpFile;
 import com.jetbrains.php.lang.psi.elements.*;
 import com.jetbrains.php.lang.psi.visitors.PhpElementVisitor;
 import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateChangesTrackerComponent;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectConfiguration;
-import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSettings;
+import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectSettings;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import com.kalessil.phpStorm.phpInspectionsEA.utils.OpenapiResolveUtil;
 import org.jetbrains.annotations.NotNull;
@@ -133,8 +132,8 @@ public abstract class BasePhpElementVisitor extends PhpElementVisitor {
             return true;
         }
 
-        final Project project                         = target.getProject();
-        final EAUltimateProjectConfiguration settings = project.getComponent(EAUltimateProjectConfiguration.class);
+        final Project project                    = target.getProject();
+        final EAUltimateProjectSettings settings = project.getComponent(EAUltimateProjectSettings.class);
         if (settings != null) {
             /* skip inactive categories */
             if (!settings.isCategoryActive(category)) {

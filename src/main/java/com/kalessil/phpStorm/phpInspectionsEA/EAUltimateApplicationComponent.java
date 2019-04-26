@@ -100,7 +100,7 @@ public class EAUltimateApplicationComponent implements ApplicationComponent {
             return;
         }
 
-        final EAUltimateSettings settings = EAUltimateSettings.getInstance();
+        final EAUltimateApplicationSettings settings = EAUltimateApplicationSettings.getInstance();
 
         /* dump plugin version information */
         if (this.updated = !plugin.getVersion().equals(settings.getVersion())) {

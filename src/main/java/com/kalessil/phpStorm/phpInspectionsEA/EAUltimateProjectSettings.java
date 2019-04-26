@@ -21,12 +21,12 @@ import java.util.*;
  * file that was distributed with this source code.
  */
 
-@State(name = "EAUltimateProjectSettings", storages = @Storage("$PROJECT_CONFIG_DIR$/php_inspections_ea_ultimate.xml"))
-public class EAUltimateProjectConfiguration extends AbstractProjectComponent implements PersistentStateComponent<Element> {
+@State(name = "EAUltimateProjectSettings", storages = @Storage("$PROJECT_CONFIG_DIR$/php-inspections-ea-ultimate.xml"))
+public class EAUltimateProjectSettings extends AbstractProjectComponent implements PersistentStateComponent<Element> {
     private boolean analyzeOnlyModifiedFiles            = false;
     private Map<StrictnessCategory, Boolean> categories = new LinkedHashMap<>();
 
-    protected EAUltimateProjectConfiguration(@NotNull Project project) {
+    protected EAUltimateProjectSettings(@NotNull Project project) {
         super(project);
         Arrays.stream(StrictnessCategory.values()).forEach(category -> categories.put(category, true));
     }
@@ -67,7 +67,7 @@ public class EAUltimateProjectConfiguration extends AbstractProjectComponent imp
 
         final Element settingsNode = state.getChild("settings");
         if (settingsNode != null) {
-            final Element analyzeOnlyModifiedFilesNode = state.getChild("ANALYZE_ONLY_MODIFIED_FILES");
+            final Element analyzeOnlyModifiedFilesNode = settingsNode.getChild("ANALYZE_ONLY_MODIFIED_FILES");
             if (analyzeOnlyModifiedFilesNode != null) {
                 analyzeOnlyModifiedFiles = "yes".equals(analyzeOnlyModifiedFilesNode.getAttributeValue("enabled"));
             }

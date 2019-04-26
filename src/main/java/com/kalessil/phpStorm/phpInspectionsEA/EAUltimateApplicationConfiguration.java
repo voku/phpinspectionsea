@@ -17,8 +17,8 @@ public class EAUltimateApplicationConfiguration implements Configurable {
     @Nullable
     @Override
     public JComponent createComponent() {
-        final EAUltimateSettings settings     = EAUltimateSettings.getInstance();
-        SEND_CRASH_REPORTS                    = settings.getSendCrashReports();
+        final EAUltimateApplicationSettings settings = EAUltimateApplicationSettings.getInstance();
+        SEND_CRASH_REPORTS                           = settings.getSendCrashReports();
 
         final ComparisonStyle comparisonStyle = settings.getComparisonStyle();
         COMPARISON_STYLE_REGULAR              = comparisonStyle == ComparisonStyle.REGULAR;
@@ -40,14 +40,14 @@ public class EAUltimateApplicationConfiguration implements Configurable {
 
     @Override
     public boolean isModified() {
-        final EAUltimateSettings settings = EAUltimateSettings.getInstance();
+        final EAUltimateApplicationSettings settings = EAUltimateApplicationSettings.getInstance();
         return SEND_CRASH_REPORTS    != settings.getSendCrashReports() ||
                COMPARISON_STYLE_YODA != (settings.getComparisonStyle() == ComparisonStyle.YODA);
     }
 
     @Override
     public void apply() {
-        final EAUltimateSettings settings = EAUltimateSettings.getInstance();
+        final EAUltimateApplicationSettings settings = EAUltimateApplicationSettings.getInstance();
         settings.setSendCrashReports(SEND_CRASH_REPORTS);
         settings.setComparisonStyle(COMPARISON_STYLE_REGULAR ? ComparisonStyle.REGULAR : ComparisonStyle.YODA);
     }

@@ -1014,8 +1014,8 @@
         implementationClass="com.kalessil.phpStorm.phpInspectionsEA.inspectors.semanticalAnalysis.classes.ExposingInternalClassesInspector"/>
 
 
-    <applicationService      serviceInterface="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSettings"
-                             serviceImplementation="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateSettings"   />
+    <applicationService      serviceInterface="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationSettings"
+                             serviceImplementation="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationSettings"   />
     <applicationConfigurable instance="com.kalessil.phpStorm.phpInspectionsEA.EAUltimateApplicationConfiguration"/>
   </extensions>
 
@@ -1033,7 +1033,7 @@
           <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateChangesTrackerComponent</implementation-class>
       </component>
       <component>
-          <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectConfiguration</implementation-class>
+          <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectSettings</implementation-class>
       </component>
       <component>
           <implementation-class>com.kalessil.phpStorm.phpInspectionsEA.gui.EAUltimateSidebarComponent</implementation-class>

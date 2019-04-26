@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 @State(name = "EAUltimateApplicationSettings", storages = @Storage("$APP_CONFIG$/php_inspections_ea_ultimate.xml"))
-public class EAUltimateSettings implements PersistentStateComponent<Element> {
+public class EAUltimateApplicationSettings implements PersistentStateComponent<Element> {
     private ComparisonStyle comparisonStyle;
 
     private String sendCrashReports;
@@ -21,19 +21,19 @@ public class EAUltimateSettings implements PersistentStateComponent<Element> {
     private String version;
     private String uuid;
 
-    private static EAUltimateSettings instance;
+    private static EAUltimateApplicationSettings instance;
 
     @NotNull
-    public static EAUltimateSettings getInstance() {
+    public static EAUltimateApplicationSettings getInstance() {
         return instance == null
-                ? instance = ServiceManager.getService(EAUltimateSettings.class)
+                ? instance = ServiceManager.getService(EAUltimateApplicationSettings.class)
                 : instance;
     }
 
     @Nullable
     @Override
     public Element getState() {
-        final Element element = new Element("EAUltimateSettings");
+        final Element element = new Element("EAUltimateApplicationSettings");
 
         if (this.versionOldest != null) {
             element.setAttribute("version", this.version);

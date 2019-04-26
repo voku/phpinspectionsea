@@ -73,16 +73,22 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                         (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, "Inspections")
                 );
             });
-            component.addPanel("Strictness categories (loosest to strictest)", panel -> {
+            component.addPanel("Strictness categories * (loosest to strictest)", panel -> {
                 final EAUltimateProjectConfiguration s = myProject.getComponent(EAUltimateProjectConfiguration.class);
                 panel.addCheckbox("Prio 1: Security",                 s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_SECURITY),                 (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_SECURITY, is));
                 panel.addCheckbox("Prio 2: Probable bugs",            s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS),            (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_PROBABLE_BUGS, is));
                 panel.addCheckbox("Prio 3: Performance",              s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE),              (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_PERFORMANCE, is));
-                panel.addCheckbox("Prio 4: Architecture",             s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE),             (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE, is));
+                panel.addCheckbox("Prio 4: Architecture, PhpUnit",    s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE),             (is) -> {
+                                                                                                                                                                s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_ARCHITECTURE, is);
+                                                                                                                                                                s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_PHPUNIT, is);
+                                                                                                                                                            });
                 panel.addCheckbox("Prio 5: Control flow",             s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW),             (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_CONTROL_FLOW, is));
                 panel.addCheckbox("Prio 6: Language level migration", s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION), (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_LANGUAGE_LEVEL_MIGRATION, is));
                 panel.addCheckbox("Prio 7: Code style",               s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE),               (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_CODE_STYLE, is));
                 panel.addCheckbox("Prio 8: Unused",                   s.isCategoryActive(StrictnessCategory.STRICTNESS_CATEGORY_UNUSED),                   (is) -> s.setCategoryActiveFlag(StrictnessCategory.STRICTNESS_CATEGORY_UNUSED, is));
+
+                panel.addText("");
+                panel.addText("* inspections from the un-checked groups are not running");
             });
         });
     }

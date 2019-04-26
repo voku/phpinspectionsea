@@ -15,8 +15,6 @@ import java.util.UUID;
 public class EAUltimateApplicationSettings implements PersistentStateComponent<Element> {
     private ComparisonStyle comparisonStyle;
 
-    private String sendCrashReports;
-
     private String versionOldest;
     private String version;
     private String uuid;
@@ -44,9 +42,6 @@ public class EAUltimateApplicationSettings implements PersistentStateComponent<E
         if (this.uuid != null) {
             element.setAttribute("uuid", this.uuid);
         }
-        if (this.sendCrashReports != null) {
-            element.setAttribute("sendCrashReports", this.sendCrashReports);
-        }
         if (this.comparisonStyle != null) {
             element.setAttribute("comparisonStyle", this.comparisonStyle.getValue());
         }
@@ -68,10 +63,6 @@ public class EAUltimateApplicationSettings implements PersistentStateComponent<E
         final String uuidValue = element.getAttributeValue("uuid");
         this.uuid              = (uuidValue == null ? UUID.randomUUID().toString() : uuidValue);
 
-        /* crashes collection */
-        final String sendCrashReportsValue = element.getAttributeValue("sendCrashReports");
-        this.sendCrashReports              = sendCrashReportsValue == null ? "true" : sendCrashReportsValue;
-
         /* comparison style */
         final String comparisonStyleValue = element.getAttributeValue("comparisonStyle");
         this.comparisonStyle              = comparisonStyleValue == null || comparisonStyleValue.equals(ComparisonStyle.REGULAR.getValue())
@@ -90,14 +81,6 @@ public class EAUltimateApplicationSettings implements PersistentStateComponent<E
 
     public String getUuid() {
         return this.uuid;
-    }
-
-    public boolean getSendCrashReports() {
-        return this.sendCrashReports != null && this.sendCrashReports.equals("true");
-    }
-
-    public void setSendCrashReports(boolean value) {
-        this.sendCrashReports = (value ? "true" : "false");
     }
 
     public void setComparisonStyle(final ComparisonStyle comparisonStyleValue) {

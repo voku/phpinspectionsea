@@ -10,7 +10,9 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /*
  * This file is part of the Php Inspections (EA Extended) package.
@@ -24,6 +26,7 @@ import java.util.*;
 @State(name = "EAUltimateProjectSettings", storages = @Storage("$PROJECT_CONFIG_DIR$/php-inspections-ea-ultimate.xml"))
 public class EAUltimateProjectSettings extends AbstractProjectComponent implements PersistentStateComponent<Element> {
     private boolean analyzeOnlyModifiedFiles            = false;
+    private boolean reportCrashReports                  = true;
     private Map<StrictnessCategory, Boolean> categories = new LinkedHashMap<>();
 
     protected EAUltimateProjectSettings(@NotNull Project project) {
@@ -88,5 +91,13 @@ public class EAUltimateProjectSettings extends AbstractProjectComponent implemen
 
     public void setAnalyzingOnlyModifiedFiles(boolean value) {
         analyzeOnlyModifiedFiles = value;
+    }
+
+    public boolean isReportingCrashReports() {
+        return reportCrashReports;
+    }
+
+    public void setReportingCrashReports(boolean value) {
+        reportCrashReports = value;
     }
 }

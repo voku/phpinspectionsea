@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 public class EAUltimateApplicationConfiguration implements Configurable {
-    private boolean SEND_CRASH_REPORTS;
     private boolean COMPARISON_STYLE_REGULAR;
     private boolean COMPARISON_STYLE_YODA;
 
@@ -18,17 +17,11 @@ public class EAUltimateApplicationConfiguration implements Configurable {
     @Override
     public JComponent createComponent() {
         final EAUltimateApplicationSettings settings = EAUltimateApplicationSettings.getInstance();
-        SEND_CRASH_REPORTS                           = settings.getSendCrashReports();
-
-        final ComparisonStyle comparisonStyle = settings.getComparisonStyle();
-        COMPARISON_STYLE_REGULAR              = comparisonStyle == ComparisonStyle.REGULAR;
-        COMPARISON_STYLE_YODA                 = comparisonStyle == ComparisonStyle.YODA;
+        final ComparisonStyle comparisonStyle        = settings.getComparisonStyle();
+        COMPARISON_STYLE_REGULAR                     = comparisonStyle == ComparisonStyle.REGULAR;
+        COMPARISON_STYLE_YODA                        = comparisonStyle == ComparisonStyle.YODA;
 
         return OptionsComponent.create(component -> {
-            component.addPanel("Privacy", panel ->
-                panel.addCheckbox("Automatically send crash-reports", SEND_CRASH_REPORTS, (isSelected) -> SEND_CRASH_REPORTS = isSelected)
-            );
-
             /* comparison style */
             component.addPanel("Comparison code style", panel ->
                 panel.delegateRadioCreation(radio -> {
@@ -41,14 +34,12 @@ public class EAUltimateApplicationConfiguration implements Configurable {
     @Override
     public boolean isModified() {
         final EAUltimateApplicationSettings settings = EAUltimateApplicationSettings.getInstance();
-        return SEND_CRASH_REPORTS    != settings.getSendCrashReports() ||
-               COMPARISON_STYLE_YODA != (settings.getComparisonStyle() == ComparisonStyle.YODA);
+        return COMPARISON_STYLE_YODA != (settings.getComparisonStyle() == ComparisonStyle.YODA);
     }
 
     @Override
     public void apply() {
         final EAUltimateApplicationSettings settings = EAUltimateApplicationSettings.getInstance();
-        settings.setSendCrashReports(SEND_CRASH_REPORTS);
         settings.setComparisonStyle(COMPARISON_STYLE_REGULAR ? ComparisonStyle.REGULAR : ComparisonStyle.YODA);
     }
 

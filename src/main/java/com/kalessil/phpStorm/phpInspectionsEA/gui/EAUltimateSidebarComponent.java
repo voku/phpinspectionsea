@@ -1,5 +1,6 @@
 package com.kalessil.phpStorm.phpInspectionsEA.gui;
 
+import com.intellij.openapi.components.AbstractProjectComponent;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
@@ -11,7 +12,6 @@ import com.kalessil.phpStorm.phpInspectionsEA.EAUltimateProjectSettings;
 import com.kalessil.phpStorm.phpInspectionsEA.license.LicenseService;
 import com.kalessil.phpStorm.phpInspectionsEA.settings.StrictnessCategory;
 import org.jetbrains.annotations.NotNull;
-import com.intellij.openapi.components.AbstractProjectComponent;
 
 import javax.swing.*;
 
@@ -73,6 +73,7 @@ public class EAUltimateSidebarComponent extends AbstractProjectComponent {
                         "File / Settings / Editor / Inspections",
                         (event) -> ShowSettingsUtil.getInstance().showSettingsDialog(myProject, "Inspections")
                 );
+                panel.addCheckbox("Automatically send crash-reports", s.isReportingCrashReports(), s::setReportingCrashReports);
                 panel.addCheckbox("Analyze only modified files", s.isAnalyzingOnlyModifiedFiles(), s::setAnalyzingOnlyModifiedFiles);
 
             });

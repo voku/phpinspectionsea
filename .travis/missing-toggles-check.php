@@ -9,7 +9,6 @@
 
     $missingDistractionTogglesFiles = [];
     $partialDistractionTogglesFiles = [];
-    $missingUltimateTogglesFiles    = [];
     $inconsistentStrictnessToggles  = [];
 
     /* @var \SplFileInfo $file */
@@ -42,19 +41,6 @@
                 }
             }
 
-            /* ultimate toggles */
-            $ultimateToggles = 0;
-            $lastPosition    = 0;
-            $searchFragment  = '.areFeaturesEnabled';
-            while (($lastPosition = strpos($content, $searchFragment, $lastPosition)) !== false) {
-                ++$ultimateToggles;
-                $lastPosition += strlen($searchFragment);
-            }
-
-            if ($ultimateToggles > 0 && $visitors != $ultimateToggles) {
-                $missingUltimateTogglesFiles[] = $file->getFilename();
-            }
-
             if ($visitors > 0) {
                 preg_match_all('/StrictnessCategory\.STRICTNESS_CATEGORY_\w+/', $content, $strictnessToggles);
                 $strictnessTypes = (array) $strictnessToggles[0];
@@ -73,10 +59,6 @@
 
     if (count($inconsistentStrictnessToggles) > 0) {
         echo 'Following files has inconsistent strictness toggles: ' . PHP_EOL . implode(PHP_EOL, $inconsistentStrictnessToggles) . PHP_EOL;
-        exit(-1);
-    }
-    if (count($missingUltimateTogglesFiles) > 0) {
-        echo 'Following files has inconsistent ultimate toggles: ' . PHP_EOL . implode(PHP_EOL, $missingUltimateTogglesFiles) . PHP_EOL;
         exit(-1);
     }
     if (count($partialDistractionTogglesFiles) > 0) {

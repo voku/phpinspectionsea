@@ -20,7 +20,7 @@
         if (($inspectionContent = file_get_contents($inspectionPath)) === false) {
             throw new \RuntimeException('Could not load inspection code: ' . $attributes->implementationClass);
         }
-        $container->toggle = (strpos($inspectionContent, '.areFeaturesEnabled') !== false);
+        $container->toggle = (strpos($inspectionContent, 'return new FeaturedPhpElementVisitor()') !== false);
 
         $className = substr($attributes->implementationClass, strrpos($attributes->implementationClass, '.') + 1);
         $ultimateDefinitions[$className] = $container;
